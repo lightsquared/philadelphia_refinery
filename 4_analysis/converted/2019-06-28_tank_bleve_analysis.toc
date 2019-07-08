@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Background}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}First Law of Thermodynamics}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Internal Energy}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Conversion to TNT Equivalent Weight}{6}{subsection.2.3}
+\contentsline {section}{\numberline {3}Notebook Imports}{7}{section.3}
+\contentsline {section}{\numberline {4}Cleanup Data}{10}{section.4}
+\contentsline {section}{\numberline {5}Analysis/Modeling}{11}{section.5}
+\contentsline {section}{\numberline {6}Results}{12}{section.6}
+\contentsline {section}{\numberline {7}Conclusion}{13}{section.7}
+\contentsline {section}{\numberline {8}References}{14}{section.8}
