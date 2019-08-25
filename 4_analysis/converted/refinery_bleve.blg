@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: refinery_bleve.aux
+The style file: unsrtnat.bst
+Database file #1: refinery_bleve_files/library.bib
+You've used 13 entries,
+            2481 wiz_defined-function locations,
+            642 strings with 6841 characters,
+and the built_in function-call counts, 3850 in all, are:
+= -- 323
+> -- 147
+< -- 10
++ -- 69
+- -- 42
+* -- 232
+:= -- 615
+add.period$ -- 41
+call.type$ -- 13
+change.case$ -- 25
+chr.to.int$ -- 12
+cite$ -- 13
+duplicate$ -- 210
+empty$ -- 401
+format.name$ -- 57
+if$ -- 824
+int.to.chr$ -- 2
+int.to.str$ -- 14
+missing$ -- 8
+newline$ -- 75
+num.names$ -- 39
+pop$ -- 135
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 141
+stack$ -- 0
+substring$ -- 70
+swap$ -- 31
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 85
+warning$ -- 0
+while$ -- 30
+width$ -- 0
+write$ -- 172

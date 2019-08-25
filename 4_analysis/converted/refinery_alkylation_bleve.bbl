@@ -1,0 +1,40 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Renshaw and DiNapoli(2019)]{Renshaw2019}
+Jarrett Renshaw and Jessica DiNapoli.
+\newblock {Unit at Philadelphia refinery completely destroyed in fire}, 2019.
+\newblock URL
+  \url{https://www.reuters.com/article/us-usa-refinery-blast/unit-at-philadelphia-refinery-completely-destroyed-in-fire-sources-idUSKCN1TO0SZ}.
+
+\bibitem[{Safety Center for Chemical Process}(2010)]{Safety2010}
+{Safety Center for Chemical Process}.
+\newblock \emph{{Guidelines for Vapor Cloud Explosion, Pressure Vessel Burst,
+  BLEVE, and Flash Fire Hazards}}.
+\newblock John Wiley {\&} Sons, Ltd, Hoboken, 2nd edition, 2010.
+\newblock ISBN 978-0-470-25147-8.
+
+\bibitem[Duchneskie(2019)]{Duchneskie2019}
+John Duchneskie.
+\newblock {Image From: Philadelphia Energy Solutions to close refinery damaged
+  by fire; gas prices spike}, jun 2019.
+\newblock URL
+  \url{https://www.inquirer.com/business/philadelphia-refinery-fire-plan-to-close-20190626.html}.
+
+\bibitem[{Flowserve Corporation}(2000)]{flowserve2000}
+{Flowserve Corporation}.
+\newblock {Refinery Processes Industry Guide}, 2000.
+\newblock URL \url{https://pro-quip.com/images/proquip/PDFs/Refining Industry
+  Guide.pdf}.
+
+\bibitem[Engineers(2013)]{Engineers2013}
+American Society of~Mechanical Engineers.
+\newblock \emph{{Boiler and Pressure Vessel Code, Section III, Rules for
+  Construction of Pressure Vessels}}.
+\newblock ASME, New York, NY, 2013.
+
+\end{thebibliography}

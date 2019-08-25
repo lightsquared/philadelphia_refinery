@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}% 
+\contentsline {section}{\numberline {2}Background}{4}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Refinery}{4}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Treater Feed Surge Tank}{4}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Pressure Relief Valve}{7}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Recovered Drum Debris}{7}{subsection.2.4}% 
+\contentsline {subsection}{\numberline {2.5}Boiling-Liquid Expanding-Vapor Explosion (BLEVE)}{9}{subsection.2.5}% 
+\contentsline {section}{\numberline {3}Calculation of Air Blast from a BLEVE}{11}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Data Collection}{11}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Pressure at State 1 (Pre-failure State)}{11}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}Pressure at State 2 (Final Expanded State)}{11}{subsection.3.3}% 
+\contentsline {subsection}{\numberline {3.4}Internal Energy at State 2}{13}{subsection.3.4}% 
+\contentsline {section}{\numberline {4}The Specific Work}{14}{section.4}% 
+\contentsline {section}{\numberline {5}The Explosion Energy}{15}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}Nondimensional Side-on Pressure and Impulse}{15}{subsection.5.1}% 
+\contentsline {section}{\numberline {6}References}{16}{section.6}% 

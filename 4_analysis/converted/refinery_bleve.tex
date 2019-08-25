@@ -1,0 +1,1164 @@
+
+
+% A latex document created by ipypublish
+% outline: ipypublish.templates.outline_schemas/latex_outline.latex.j2
+% with segments:
+% - standard-standard_packages: with standard nbconvert packages
+% - standard-standard_definitions: with standard nbconvert definitions
+% - ipypublish-doc_article: with the main ipypublish article setup
+% - ipypublish-front_pages: with the main ipypublish title and contents page setup
+% - ipypublish-biblio_natbib: with the main ipypublish bibliography
+% - ipypublish-contents_output: with the main ipypublish content
+% - ipypublish-contents_framed_code: with the input code wrapped and framed
+% - ipypublish-glossary: with the main ipypublish glossary
+%
+%%%%%%%%%%%% DOCCLASS
+
+\documentclass[10pt,parskip=half,
+toc=sectionentrywithdots,
+bibliography=totocnumbered,
+captions=tableheading,numbers=noendperiod]{scrartcl}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% PACKAGES
+
+\usepackage[T1]{fontenc} % Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage[skip=3pt]{caption}
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage[table]{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+    \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+                        % to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+
+\usepackage{translations}
+\usepackage{microtype} % improves the spacing between words and letters
+\usepackage{placeins} % placement of figures
+% could use \usepackage[section]{placeins} but placing in subsection in command section
+% Places the float at precisely the location in the LaTeX code (with H)
+\usepackage{float}
+\usepackage[colorinlistoftodos,obeyFinal,textwidth=.8in]{todonotes} % to mark to-dos
+% number figures, tables and equations by section
+% fix for new versions of texlive (see https://tex.stackexchange.com/a/425603/107738)
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+% header/footer
+\usepackage[footsepline=0.25pt]{scrlayer-scrpage}
+
+% bibliography formatting
+\usepackage[sort,super]{natbib}
+% hyperlink doi's
+\usepackage{doi}
+
+    % define a code float
+    \usepackage{newfloat} % to define a new float types
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Code]{codecell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{textcell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{errorcell}
+
+    \usepackage{listings} % a package for wrapping code in a box
+    \usepackage[framemethod=tikz]{mdframed} % to fram code
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% DEFINITIONS
+
+% Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+
+% Math Jax compatability definitions
+\def\gt{>}
+\def\lt{<}
+
+\setcounter{secnumdepth}{5}
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+\DeclareTranslationFallback{Author}{Author}
+\DeclareTranslation{Portuges}{Author}{Autor}
+
+\DeclareTranslationFallback{List of Codes}{List of Codes}
+\DeclareTranslation{Catalan}{List of Codes}{Llista de Codis}
+\DeclareTranslation{Danish}{List of Codes}{Liste over Koder}
+\DeclareTranslation{German}{List of Codes}{Liste der Codes}
+\DeclareTranslation{Spanish}{List of Codes}{Lista de C\'{o}digos}
+\DeclareTranslation{French}{List of Codes}{Liste des Codes}
+\DeclareTranslation{Italian}{List of Codes}{Elenco dei Codici}
+\DeclareTranslation{Dutch}{List of Codes}{Lijst van Codes}
+\DeclareTranslation{Portuges}{List of Codes}{Lista de C\'{o}digos}
+
+\DeclareTranslationFallback{Supervisors}{Supervisors}
+\DeclareTranslation{Catalan}{Supervisors}{Supervisors}
+\DeclareTranslation{Danish}{Supervisors}{Vejledere}
+\DeclareTranslation{German}{Supervisors}{Vorgesetzten}
+\DeclareTranslation{Spanish}{Supervisors}{Supervisores}
+\DeclareTranslation{French}{Supervisors}{Superviseurs}
+\DeclareTranslation{Italian}{Supervisors}{Le autorit\`{a} di vigilanza}
+\DeclareTranslation{Dutch}{Supervisors}{supervisors}
+\DeclareTranslation{Portuguese}{Supervisors}{Supervisores}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breaklines=true,
+    literate={\-}{}{0\discretionary{-}{}{-}},
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\lstset{style=mystyle}
+
+\surroundwithmdframed[
+  hidealllines=true,
+  backgroundcolor=backcolour,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  innertopmargin=0pt,
+  innerbottommargin=0pt]{lstlisting}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% MARGINS
+
+ % Used to adjust the document margins
+\usepackage{geometry}
+\geometry{tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in,
+nohead,includefoot,footskip=25pt}
+% you can use showframe option to check the margins visually
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% COMMANDS
+
+% ensure new section starts on new page
+\addtokomafont{section}{\clearpage}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy
+
+% Setup hyperref package
+\hypersetup{
+    breaklinks=true,  % so long urls are correctly broken across lines
+    colorlinks=true,
+    urlcolor=urlcolor,
+    linkcolor=linkcolor,
+    citecolor=citecolor,
+    }
+
+% ensure figures are placed within subsections
+\makeatletter
+\AtBeginDocument{%
+    \expandafter\renewcommand\expandafter\subsection\expandafter
+    {\expandafter\@fb@secFB\subsection}%
+    \newcommand\@fb@secFB{\FloatBarrier
+    \gdef\@fb@afterHHook{\@fb@topbarrier \gdef\@fb@afterHHook{}}}%
+    \g@addto@macro\@afterheading{\@fb@afterHHook}%
+    \gdef\@fb@afterHHook{}%
+}
+\makeatother
+
+% number figures, tables and equations by section
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+\makeatletter
+\@addtoreset{table}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand\thetable{\thesection.\arabic{table}}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+    % set global options for float placement
+    \makeatletter
+        \providecommand*\setfloatlocations[2]{\@namedef{fps@#1}{#2}}
+    \makeatother
+
+% align captions to left (indented)
+\captionsetup{justification=raggedright,
+singlelinecheck=false,format=hang,labelfont={it,bf}}
+
+% shift footer down so space between separation line
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.oneside}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.oneside}
+\pagestyle{scrheadings}
+\clearscrheadfoot{}
+\ifoot{\leftmark}
+\renewcommand{\sectionmark}[1]{\markleft{\thesection\ #1}}
+\ofoot{\pagemark}
+\cfoot{}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% FINAL HEADER MATERIAL
+
+% clereref must be loaded after anything that changes the referencing system
+\usepackage{cleveref}
+\creflabelformat{equation}{#2#1#3}
+
+% make the code float work with cleverref
+\crefname{codecell}{code}{codes}
+\Crefname{codecell}{code}{codes}
+% make the text float work with cleverref
+\crefname{textcell}{text}{texts}
+\Crefname{textcell}{text}{texts}
+% make the text float work with cleverref
+\crefname{errorcell}{error}{errors}
+\Crefname{errorcell}{error}{errors}
+
+%%%%%%%%%%%%
+
+\begin{document}
+
+    \begin{titlepage}
+
+  \begin{center}
+
+  \vspace*{1cm}
+
+  \Huge\textbf{Overpressure Analysis of Girard Point Refinery Accident}
+
+  \vspace{0.5cm}\LARGE{Boiling-Liquid Expanding-Vapor Explosion}
+
+  \vspace{1.5cm}
+
+  \begin{minipage}{0.8\textwidth}
+    \begin{center}
+    \begin{minipage}{0.39\textwidth}
+    \begin{flushleft} \Large
+    \emph{\GetTranslation{Author}:}\\S. Kevin McNeill\\\href{mailto:shonn.mcneill@atf.gov}{shonn.mcneill@atf.gov}
+    \end{flushleft}
+    \end{minipage}
+    \hspace{\fill}
+    \begin{minipage}{0.39\textwidth}
+    \begin{flushright} \Large
+    \end{flushright}
+    \end{minipage}
+    \end{center}
+  \end{minipage}
+
+  \vfill
+
+  \begin{minipage}{0.8\textwidth}
+  \begin{center}
+  \end{center}
+  \end{minipage}
+
+  \vspace{0.8cm}
+      \LARGE{National Center for Explosives Training and Research}\\
+      \LARGE{Explosives Research and Development Division}\\
+
+  \vspace{0.4cm}
+
+  \today
+
+  \end{center}
+  \end{titlepage}
+
+    \begingroup
+    \let\cleardoublepage\relax
+    \let\clearpage\relax\tableofcontents
+    \endgroup
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+On June 21, 2019, at approximately 4:22 AM, a fire and explosion, see
+\cref{fig:fire}, occurred at the Girard Point Refinery owned by
+Philadelphia Energy Solutions \cite{Renshaw2019}. One of the three
+explosions observed that day was from the V1 treater-feed-surge-drum in
+the refineries pretreatment unit. The explosion propelled the largest
+piece (estimated: \(41809.6lb\:(18964.5kg)\)) of the drum approximately
+\(2100ft\:(640m)\) from the blast seat, see \cref{fig:tank}. It is
+hypothesized that a boiling-liquid expanding-vapor explosion (BLEVE)
+event provided the energy to generate the blast wave. The Philadelphia
+Fire Department requested ATF estimate the blast overpressure generated
+when the tank exploded. This paper is an engineering analysis to
+estimate the blast overpressure assuming a BLEVE occurred. The analysis
+is based upon an adiabatic and isentropic energy analysis developed by
+the Center for Chemical Process Safety \cite{Safety2010}.
+
+\begin{figure}[H]
+\hypertarget{fig:fire}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/fig_refinery_fire.png}
+\end{center}
+\caption{A view of the Philadelphia Energy Solutions Inc's oil refinery while on
+fire \cite{Maykuth2019}.}\label{fig:fire}
+}
+\end{figure}
+
+    \begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{refinery_bleve_files/output_2_0.png}\end{center}\caption{Largest piece of the treater-feed-surge-drum was propelled 2100ft from
+the blast seat. The upper image shows the drum piece in flight moving
+left to right. The second image shows the drum piece after striking the
+edge of the Schuylkill River shoreline.}\label{fig:tank}\end{figure}
+
+\hypertarget{background}{%
+\section{Background}\label{background}}
+
+\hypertarget{refinery}{%
+\subsection{Refinery}\label{refinery}}
+
+The Girard Point Refinery is located in southwest Philadelphia, PA, on
+the Schuylkill River, see \cref{fig:map}. The refinery produced
+approximately 335,000 bpd of gasoline, and was the largest on the East
+Coast \cite{AssociatedPress2019}. The treater-feed-surge-drum, involved
+in the explosion, is part of the pretreatment process of alkylation used
+in the production of gasoline.
+
+\begin{figure}[H]
+\hypertarget{fig:map}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/fig_map_girard.jpeg}
+\end{center}
+\caption{Map of Girard Point Refinery showing the blast seat location
+\cite{Duchneskie2019}.}\label{fig:map}
+}
+\end{figure}
+
+\hypertarget{treater-feed-surge-tank}{%
+\subsection{Treater Feed Surge Tank}\label{treater-feed-surge-tank}}
+
+Alkylaition generally converts propylene \((C_3H_6)\), butylene
+\((C_4H_8)\), pentene \((C_5H_{10})\), and isobutane \((C_3H_{10})\) to
+alkane liquids such as isoheptane \((C_7H_{16})\) and isooctane
+\((C_8H_{16})\). These alkylates are a highly valued component in the
+production of gasoline because of there high octane and low vapor
+pressure \cite{flowserve2000}. The treater-feed-surge-drum (TFSD) was
+located between the fluid catalytic cracker and the alkylaition unit.
+The purpose of a surge drum is to stabilize fluctuations in the overall
+system flow rate. The TFSD was part of the pretreatment process for
+alkylation, see \cref{fig:fig_process_flow}. During pretreatment, also
+referred to as sweetening, sulfur compounds (hydrogen sulfide, thiophene
+and mercaptan) are removed to improve color, odor, and oxidation
+stability.
+
+\begin{figure}[H]
+\hypertarget{fig:fig_process_flow}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/fig_process_flow.jpeg}
+\end{center}
+\caption{Simple flow diagram of the sweetening and treating process where the
+TFSD was located at the time of the explosion.
+\cite{Temur2014,Malone2019}}\label{fig:fig_process_flow}
+}
+\end{figure}
+
+The TFSD tank measured 39'-8" in length, not including the heads, see
+\cref{tbl:tbl_tank} and \cref{fig:fig_tank} for construction details
+\cite{PES2019}. At the time of the explosion, the TFSD contained
+\(20160gal\:(76.3m^3)\) of butane (50\% by volume) and butene (40\% by
+volume) and other lesser constituients, see
+\cref{tbl:tbl_chemicals_in_tank}.
+
+\begin{longtable}[]{@{}rll@{}}
+\caption{Treater-Feed-Surge-Drum Construction Parameters \cite{PES2019}
+\label{tbl:tbl_tank}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.23\columnwidth}\raggedleft
+Parameter\strut
+\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright
+Value\strut
+\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright
+Units\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.23\columnwidth}\raggedleft
+Parameter\strut
+\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright
+Value\strut
+\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright
+Units\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Type\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+horizontal\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Year Built\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+1972\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Construction Material\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+A516 Type 70 Steel\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Tank Wall Thickness\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+0.8125\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+in\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Volume\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+372228\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+gal\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Percent Filled\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+53.3\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+\%\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Mass\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+74660\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+lb\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedleft
+Safety Valve Set\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+155\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
+psig\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{figure}[H]
+\hypertarget{fig:fig_tank}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.8\linewidth}{refinery_bleve_files/fig_tank.jpeg}
+\end{center}
+\caption{Diagram depicting the dimensions of the TFSD tank. The tank was
+positioned 25 ft above ground level and estimated to contain 20160 gal
+(53.3\% filled) of butane (50\% by volume) and butene (40\% by volume)
+at the time of the explosion.\cite{PES2019}}\label{fig:fig_tank}
+}
+\end{figure}
+
+\begin{longtable}[]{@{}rr@{}}
+\caption{Chemical Contents in the Treater-Feed-Surge-Drum Nearest to the
+Time of the Explosion \cite{PES2019}
+\label{tbl:tbl_chemicals_in_tank}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Chemical\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Percent by Volume\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Chemical\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Percent by Volume\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+methane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.01\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+ethylene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+ethane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.01\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+propane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.90\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+propylene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.10\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+isobutane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+37.28\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+nbutane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+12.81\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+butens\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+40.41\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+neopentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+isopentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+3.94\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+npentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.25\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+butadiene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.33\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+benzene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C5 olefins\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+3.54\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C6 sats\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.33\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C7+\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.04\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+For this analysis only the butenes and butanes will be considered as
+they make up more than 90\% of the fluid volume. The boiling
+temperatures for butene and butane are
+\(20.66\: ^{\circ} F\:(-6.3\: ^{\circ} C)\) and
+\(30.2\: ^{\circ} F\:(-1.0\: ^{\circ} C)\) respectively; both are well
+above the tank temperature when exposed to fire so a BLEVE assumptions
+is reasonable.
+
+\hypertarget{pressure-relief-valve}{%
+\subsection{Pressure Relief Valve}\label{pressure-relief-valve}}
+
+The TFSD was fitted with a Consolidated (1906-30LC-1-CC-MS-31-RF-1) 3" x
+4" pressure relief valve (PRV). The relief pressure was set to 155 psig
+and the relief temperature was set to 183.5 \(^{\circ} F\). The PRV was
+positioned on the top of the TRFD, see \cref{fig:fig_tank}.
+
+\hypertarget{recovered-drum-debris}{%
+\subsection{Recovered Drum Debris}\label{recovered-drum-debris}}
+
+Three major pieces of the TFSD were identified after the explosion. They
+were thrown a maximum of \(2100ft\:(640m)\), see
+\cref{fig:blast_debris}. The largest piece (Large End Cap) was
+approximately \(22ft\:(6.7m)\) in length, see \cref{fig:large_end_cap},
+or a little more than half the original tank volume. The other end of
+the TFSD (Small End Cap) was recovered \(1761ft\:(536m)\) from the blast
+seat. It was approximately \(5ft\:(1.5m)\) in length, see
+\cref{fig:small_end_cap}. The piece thrown the shortest distance
+(fillet) was \(819ft\:(249m)\) from the blast seat. The fillet piece was
+heavily damaged and a photographic analysis of the length was not
+possible. However, based on the original length of the tank and removing
+the large and small end cap lengths the fillet length is approximately
+\(12ft\:(3.6m)\), see \cref{fig:fillet}.
+
+\begin{figure}[H]
+\hypertarget{fig:blast_debris}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/drum_debris_and_blast_seat_distances_small.png}
+\end{center}
+\caption{Map of Girard Point showing the blast seat and locations of the three
+main pieces of the TSFD (V-1).\cite{Malone2019a}}\label{fig:blast_debris}
+}
+\end{figure}
+
+\begin{figure}[H]
+\hypertarget{fig:large_end_cap}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/tank_length_estimate.png}
+\end{center}
+\caption{Photograph of the large end cap, estimated to be \(22ft\:(6.7m)\) in
+length based on photographic analysis. In this photograph the tank has
+been moved from it's original landing location.\cite{Malone2019a}}\label{fig:large_end_cap}
+}
+\end{figure}
+
+\begin{figure}[H]
+\hypertarget{fig:small_end_cap}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/end_cap_03.jpg}
+\end{center}
+\caption{Photograph of the small end cap, estimated to be \(5ft\:(1.5m)\) in
+length based on photographic analysis.\cite{Malone2019a}}\label{fig:small_end_cap}
+}
+\end{figure}
+
+\begin{figure}[H]
+\hypertarget{fig:fillet}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_bleve_files/1_fish_fillet2.jpg}
+\end{center}
+\caption{Photograph of the fish fillet piece, calculated to be \(12ft\:(3.6m)\)
+in length based on the total length of the drum less the lengths of the
+large and small end caps.\cite{Malone2019a}}\label{fig:fillet}
+}
+\end{figure}
+
+The calculated masses of each piece of the TFSD without appurtanaces are
+summarized in \cref{tbl:tbl_tank}. The mass calculations are based on
+the following,
+
+Ellipsoidal Head:
+\begin{equation}V_{eh}=\frac{\pi D^2 (D/4)}{6}\end{equation} Cylinder:
+\begin{equation}V_c = \frac{\pi D^2 l}{4}\end{equation}
+
+with a drum wall thickness of \(0.83in\:(2.1cm)\), a tank diameter of
+\(12ft\:(3.7m)\), and a material density for A516 steel of \(7.8g/cc\).
+Refinery records estimate the weight of the vessel empty as
+\(74660lb\:(33865kg)\) \cite{Malone2019}.
+
+\begin{longtable}[]{@{}lrrrr@{}}
+\caption{Estimated Treater-Feed-Surge-Drum Debris Mass \cite{PES2019}
+\label{tbl:tbl_tank}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright
+TFSD ID\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedleft
+Cylinder (ft)\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedleft
+Calculated Debris Mass (lb)\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedleft
+Ratio Calculated (Debris/Total)\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedleft
+Refinery Recorded Mass (lb)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright
+TFSD ID\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedleft
+Cylinder (ft)\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedleft
+Calculated Debris Mass (lb)\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedleft
+Ratio Calculated (Debris/Total)\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedleft
+Refinery Recorded Mass (lb)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+Large End Cap\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+22.0\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+31541.8\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+0.56\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+41809.6\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+Small End Cap\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+10078.5\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+0.18\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+13438.8\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+Fillet\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+15150.5\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+0.26\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+19411.6\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+Total\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+39.0\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
+56770.8\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+1.00\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
+74660.0\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{boiling-liquid-expanding-vapor-explosion-bleve}{%
+\subsection{Boiling-Liquid Expanding-Vapor Explosion
+(BLEVE)}\label{boiling-liquid-expanding-vapor-explosion-bleve}}
+
+A BLEVE results from the sudden failure of a tank containing a
+compressed vapor (head space) and a super-heated liquid (a liquid heated
+above it's boiling point but without boiling). The magnitude of the
+blast depends on how super-heated the liquid was at failure. As the
+level of super-heat rises, the portion of liquid that flash-boils rises,
+thus increasing the energy released. Once containment failure occurs the
+energy is distributed into four forms:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Overpressure wave
+\item
+  Kinetic energy of fragments
+\item
+  Deformation and failure of the containment material
+\item
+  Heat transferred to environment
+\end{enumerate}
+
+The distribution of the energy into the these four forms depends on the
+specifics of the explosion. Planas-Cuchi et al.~found that a
+\emph{fragile} failure releases 80\% of the energy into the blastwave,
+while a \emph{ductile} failure releases 40\% of the energy into the
+blastwave. The remaining energy becomes kinetic energy of the fragments.
+The heat transfer to the environment is relatively small
+\cite{Planas2004}. In practice most pressure vessels are designed with
+materials that are ductile rather than brittle to avoid sudden and
+catastrophic brittle (fragile) failures \cite{Benac2016}.
+
+\hypertarget{calculation-of-air-blast-from-a-bleve}{%
+\section{Calculation of Air Blast from a
+BLEVE}\label{calculation-of-air-blast-from-a-bleve}}
+
+\hypertarget{pressure-at-state-1-pre-failure-state}{%
+\subsection{Pressure at State 1 (Pre-failure
+State)}\label{pressure-at-state-1-pre-failure-state}}
+
+The drum (tank) is assumed to fail at \(1.21\) times the opening
+pressure of the pressure relief valve (PRV)\cite{Engineers2013}. This
+pressure is based on the American Petroleum Institutes Standard 521
+which, requires that pressure relief valves on pressure vessels achieve
+rated flow at 1.21 times the maximum allowable working pressure. The PRV
+was set to \(155psig\:(1.07Mpa)\) therefore, the absolute pressure at
+state 1 (failure state) is given by,
+
+\begin{equation}p_1 = 1.21\left(p_{PRV}+p_{atm}\right)\end{equation}
+\begin{equation}p_1 = 1.21\left(1068689.9+101325\right)\end{equation}
+\begin{equation}p_1 = 169.7psi\:(1.17\:MPa)\end{equation}
+
+\hypertarget{pressure-at-state-2-final-expanded-state}{%
+\subsection{Pressure at State 2 (Final Expanded
+State)}\label{pressure-at-state-2-final-expanded-state}}
+
+The pressure at state 2 (final expanded state) is standard atmospheric
+pressure or \(14.7psi\:(0.101MPa)\). The other state variables can be
+determined based on the ``saturated'' state of the butane and butene
+inside the tank and the known pressures. The thermodynamic data for
+states 1 and 2 is summarized in Table (\cref{tbl:thermo}).
+
+\begin{table}[H]
+\caption{Propane Thermodynamic Data for Inital (1) and Final (2) States}\label{tbl:thermo}
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+{} &  $P \left(kPa\right)$ &  $h_f \left(\frac{kJ}{kg}\right)$ &  $h_g \left(\frac{kJ}{kg}\right)$ &  $v_f \left(\frac{m^3}{kg}\right)$ &  $v_g \left(\frac{m^3}{kg}\right)$ &  $u_f \left(\frac{kJ}{kg\:K}\right)$ &  $u_g \left(\frac{kJ}{kg\:K}\right)$ &  $s_f \left(\frac{kJ}{kg\:K}\right)$ &  $s_g \left(\frac{kJ}{kg\:K}\right)$ \\
+State    &                       &                                   &                                   &                                    &                                    &                                      &                                      &                                      &                                      \\
+\midrule
+Butane-1 &              1.42E+03 &                          4.51E+05 &                          6.15E+05 &                           2.15E-03 &                           3.20E-02 &                             3.08E+02 &                             5.70E+02 &                             1.37E+00 &                             2.34E+00 \\
+Butane-2 &              1.01E+02 &                          1.99E+05 &                          5.26E+05 &                           1.72E-03 &                           4.14E-01 &                             1.00E+02 &                             4.84E+02 &                             6.07E-01 &                             2.45E+00 \\
+Butene-1 &              1.42E+03 &                          2.29E+05 &                          5.02E+05 &                           2.02E-03 &                           2.83E-02 &                             3.08E+02 &                             5.70E+02 &                             7.24E-01 &                             1.48E+00 \\
+Butene-2 &              1.01E+02 &                          8.76E-04 &                          3.92E+05 &                           1.60E-03 &                           3.74E-01 &                             1.00E+02 &                             4.84E+02 &                             3.71E-10 &                             1.47E+00 \\
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\end{table}
+
+\hypertarget{internal-energy-at-states-1-and-2}{%
+\section{Internal Energy at States 1 and
+2}\label{internal-energy-at-states-1-and-2}}
+
+\hypertarget{internal-energy-at-state-1}{%
+\subsection{Internal Energy at State
+1}\label{internal-energy-at-state-1}}
+
+The internal energy at at state 1 (saturated) is calculated from,
+
+\begin{equation}h = u + pv\end{equation}
+
+where \(h\) is the enthalpy, \(p\) is the pressure, and \(v\) is the
+specific volume. Therefore, for state 1 (fluid and gas) we have,
+
+\begin{equation}u = h - pv\end{equation}
+
+\begin{equation}u_{1f} = h_{1f} - p_1v_{1f}\end{equation}
+\begin{equation}u_{1f} = 354584.4 - (1937.603\:kPa)(0.002287\:m^3/kg)\end{equation}
+\begin{equation}u_{1f} = 350.15\:kJ/kg\end{equation}
+
+\begin{equation}u_{1g} = h_{1g} - p_1v_{1g}\end{equation}
+\begin{equation}u_{1g} = 100356.29 - (101.325\:kPa)(0.001722\:m^3/kg)\end{equation}
+\begin{equation}u_{1g} = 581.68\:kJ/kg\end{equation}
+
+and similarly for state 2,
+
+\begin{equation}u_{2f} = 100.18\:kJ/kg\end{equation}
+\begin{equation}u_{2g} = 484.01\:kJ/kg\end{equation}
+
+\hypertarget{internal-energy-at-state-2}{%
+\subsection{Internal Energy at State
+2}\label{internal-energy-at-state-2}}
+
+When the drum breaks and the propane at state 1 expands to state 2
+(atmospheric pressure) some of the liquid propane vaporizes and some of
+the gaseous propane condenses. Therefore unlike at the saturated state
+1, there is both vapor and fluid present. We can calculate the vapor
+present using the vapor quality \((\chi)\), from,
+
+\begin{equation}\chi = \frac{\nu_{tot} - \nu_f}{\nu_g-\nu_f}\end{equation}
+
+where \(\nu\) is the specific gravity. This equation is also true for
+the entropy \((s)\), internal energy \((u)\), and enthalpy \((h)\).
+Using the entropy \((s)\) we can calculate the quality of the saturated
+liquid and vapor as the propane transitions from state 1 to state 2.
+Therefore, the liquid vapor quality at state 2 is given by s
+
+\begin{equation}\chi_f = \frac{s_{f1} - s_{f2}}{s_{g2}-s_{f2}}\end{equation}
+
+\begin{equation}\chi_f = \frac{1.503188 - 0.607045}{2.449144-0.607045}\end{equation}
+
+\begin{equation}\chi_f = 0.4865\end{equation}
+
+and for the vapor at state 2,
+
+\begin{equation}\chi_g = \frac{s_{g2} - s_{g1}}{s_{g2}-s_{f2}}\end{equation}
+
+\begin{equation}\chi_g= \frac{2.449144 - 2.325970}{2.449144-0.607045}\end{equation}
+
+\begin{equation}\chi_g = 0.06687\end{equation}
+
+We can then calculate the internal energy at state 2 using,
+
+\begin{equation}u_{2-fluid} = (1-\chi_f)u_{f2} + \chi_f u_{g2}\end{equation}
+\begin{equation}u_{2-vapor} = (1-\chi_g)u_{g2} + \chi_g u_{f2}\end{equation}
+
+\begin{equation}u_{2-fluid} = (1-0.4865)100.1818 + (0.4865)(484.0111)\end{equation}
+\begin{equation}u_{2-vapor} = (1-0.0668)484.0111 + (0.0668)(100.1818)\end{equation}
+
+\begin{equation}u_{2-fluid} = 286.9068\:kJ/kg\end{equation}
+\begin{equation}u_{2-vapor} = 458.3459\:kJ/kg\end{equation}
+
+\hypertarget{the-specific-work}{%
+\section{The Specific Work}\label{the-specific-work}}
+
+The work that the expanding vapor and fluid can perform is the
+difference between the initial (1) and final (2) states,
+
+\begin{equation}e_{ex} = u_1 - u_2\end{equation}
+
+for the saturated fluid we have,
+
+\begin{equation}e_{exf} = u_{f1} - u_{2-fluid}\end{equation}
+\begin{equation}e_{exf} = 350.15 - 286.91\end{equation}
+\begin{equation}e_{exf} = 63.25\:kJ/kg\end{equation}
+
+and for the vapor,
+
+\begin{equation}e_{exg} = u_{g1} - u_{2-vapor}\end{equation}
+\begin{equation}e_{exg} = 581.68 - 458.35\end{equation}
+\begin{equation}e_{exg} = 123.34\:kJ/kg\end{equation}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+The mass of the fluid at state 1 is 34892.91 kg
+The mass of the vapor at state 1 is  2056.33 kg
+The explosion energy of the fluid at state 1 is 3394625.38 kJ.
+The explosion energy of the vapor at state 1 is 448593.94 kJ.
+The total energy of the surface explosion is Ex_tot = 3843219.32 kJ.
+
+\end{lstlisting}
+
+\hypertarget{the-explosion-energy}{%
+\section{The Explosion Energy}\label{the-explosion-energy}}
+
+The explosion energy is calcu
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+The non-dimensional range of the receptor is     0.44
+The non-dimensional tank pressure p/po is    13.97
+
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrl}
+\toprule
+{} &        P &        R &        w &            z \\
+\midrule
+0 &     3.13 &     0.24 &     5.00 &  $p/p_0=5.0$ \\
+1 &     3.12 &     0.25 &     5.00 &  $p/p_0=5.0$ \\
+2 &     3.11 &     0.27 &     5.00 &  $p/p_0=5.0$ \\
+3 &     3.09 &     0.29 &     5.00 &  $p/p_0=5.0$ \\
+4 &     3.09 &     0.30 &     5.00 &  $p/p_0=5.0$ \\
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\end{table}
+
+\hypertarget{nondimensional-side-on-pressure-and-impulse}{%
+\subsection{Nondimensional Side-on Pressure and
+Impulse}\label{nondimensional-side-on-pressure-and-impulse}}
+
+The nondimenstional side-on pressure can be calculated from Figure X and
+gives a \(\bar{P_s} = 0.064\) for an \(\bar{R}=4.4\) and a
+\(p/p_0 = 19.12\). The nondimensional side-on impulse can be calculated
+from Figure Y and gives a \(\bar{i_s} = 0.013\) for an \(\bar{R}=4.4\)
+and a \(p/p_0 = 19.12\).
+
+The side-on pressure and impulse can be calculated from the following:
+
+\begin{equation}\bar{P_s} - p_0 = (0.064)(101.325\:kPa) = 6.5\:kPa\end{equation}
+\begin{equation}i_s = \frac{(0.013)(101325\:kPa)^{2/3}(1160.9E6\:J)^{1/3}}{340\:m/s}= 86.31\:Pa {\text -} s\end{equation}
+
+\bibliographystyle{unsrtnat}
+\bibliography{refinery_bleve_files/library}
+
+\end{document}

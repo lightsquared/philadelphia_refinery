@@ -1,0 +1,18 @@
+\contentsline {subsection}{\numberline {0.1}Introduction}{2}{subsection.0.1}% 
+\contentsline {subsection}{\numberline {0.2}Background}{2}{subsection.0.2}% 
+\contentsline {subsection}{\numberline {0.3}First Law of Thermodynamics}{4}{subsection.0.3}% 
+\contentsline {subsection}{\numberline {0.4}Internal Energy}{5}{subsection.0.4}% 
+\contentsline {subsection}{\numberline {0.5}Conversion to TNT Equivalent Weight}{6}{subsection.0.5}% 
+\contentsline {section}{\numberline {1}Notebook Imports}{7}{section.1}% 
+\contentsline {section}{\numberline {2}Thermodynamic Data}{8}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Pressure at State 1 (Pre-failure State)}{8}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Pressure at State 2 (Final Expanded State)}{8}{subsection.2.2}% 
+\contentsline {section}{\numberline {3}Internal Energy at States 1 and 2}{9}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Internal Energy at State 1}{9}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Internal Energy at State 2}{9}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}The Specific Work}{11}{section.4}% 
+\contentsline {section}{\numberline {5}Cleanup Data}{13}{section.5}% 
+\contentsline {section}{\numberline {6}Analysis/Modeling}{14}{section.6}% 
+\contentsline {section}{\numberline {7}Results}{15}{section.7}% 
+\contentsline {section}{\numberline {8}Conclusion}{16}{section.8}% 
+\contentsline {section}{\numberline {9}References}{17}{section.9}% 

@@ -1,0 +1,1022 @@
+
+
+% A latex document created by ipypublish
+% outline: ipypublish.templates.outline_schemas/latex_outline.latex.j2
+% with segments:
+% - standard-standard_packages: with standard nbconvert packages
+% - standard-standard_definitions: with standard nbconvert definitions
+% - ipypublish-doc_article: with the main ipypublish article setup
+% - ipypublish-front_pages: with the main ipypublish title and contents page setup
+% - ipypublish-biblio_natbib: with the main ipypublish bibliography
+% - ipypublish-contents_output: with the main ipypublish content
+% - ipypublish-contents_framed_code: with the input code wrapped and framed
+% - ipypublish-glossary: with the main ipypublish glossary
+%
+%%%%%%%%%%%% DOCCLASS
+
+\documentclass[10pt,parskip=half,
+toc=sectionentrywithdots,
+bibliography=totocnumbered,
+captions=tableheading,numbers=noendperiod]{scrartcl}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% PACKAGES
+
+\usepackage[T1]{fontenc} % Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage[skip=3pt]{caption}
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage[table]{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+    \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+                        % to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+
+\usepackage{translations}
+\usepackage{microtype} % improves the spacing between words and letters
+\usepackage{placeins} % placement of figures
+% could use \usepackage[section]{placeins} but placing in subsection in command section
+% Places the float at precisely the location in the LaTeX code (with H)
+\usepackage{float}
+\usepackage[colorinlistoftodos,obeyFinal,textwidth=.8in]{todonotes} % to mark to-dos
+% number figures, tables and equations by section
+% fix for new versions of texlive (see https://tex.stackexchange.com/a/425603/107738)
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+% header/footer
+\usepackage[footsepline=0.25pt]{scrlayer-scrpage}
+
+% bibliography formatting
+\usepackage[sort,super]{natbib}
+% hyperlink doi's
+\usepackage{doi}
+
+    % define a code float
+    \usepackage{newfloat} % to define a new float types
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Code]{codecell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{textcell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{errorcell}
+
+    \usepackage{listings} % a package for wrapping code in a box
+    \usepackage[framemethod=tikz]{mdframed} % to fram code
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% DEFINITIONS
+
+% Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+
+% Math Jax compatability definitions
+\def\gt{>}
+\def\lt{<}
+
+\setcounter{secnumdepth}{5}
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+\DeclareTranslationFallback{Author}{Author}
+\DeclareTranslation{Portuges}{Author}{Autor}
+
+\DeclareTranslationFallback{List of Codes}{List of Codes}
+\DeclareTranslation{Catalan}{List of Codes}{Llista de Codis}
+\DeclareTranslation{Danish}{List of Codes}{Liste over Koder}
+\DeclareTranslation{German}{List of Codes}{Liste der Codes}
+\DeclareTranslation{Spanish}{List of Codes}{Lista de C\'{o}digos}
+\DeclareTranslation{French}{List of Codes}{Liste des Codes}
+\DeclareTranslation{Italian}{List of Codes}{Elenco dei Codici}
+\DeclareTranslation{Dutch}{List of Codes}{Lijst van Codes}
+\DeclareTranslation{Portuges}{List of Codes}{Lista de C\'{o}digos}
+
+\DeclareTranslationFallback{Supervisors}{Supervisors}
+\DeclareTranslation{Catalan}{Supervisors}{Supervisors}
+\DeclareTranslation{Danish}{Supervisors}{Vejledere}
+\DeclareTranslation{German}{Supervisors}{Vorgesetzten}
+\DeclareTranslation{Spanish}{Supervisors}{Supervisores}
+\DeclareTranslation{French}{Supervisors}{Superviseurs}
+\DeclareTranslation{Italian}{Supervisors}{Le autorit\`{a} di vigilanza}
+\DeclareTranslation{Dutch}{Supervisors}{supervisors}
+\DeclareTranslation{Portuguese}{Supervisors}{Supervisores}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breaklines=true,
+    literate={\-}{}{0\discretionary{-}{}{-}},
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\lstset{style=mystyle}
+
+\surroundwithmdframed[
+  hidealllines=true,
+  backgroundcolor=backcolour,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  innertopmargin=0pt,
+  innerbottommargin=0pt]{lstlisting}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% MARGINS
+
+ % Used to adjust the document margins
+\usepackage{geometry}
+\geometry{tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in,
+nohead,includefoot,footskip=25pt}
+% you can use showframe option to check the margins visually
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% COMMANDS
+
+% ensure new section starts on new page
+\addtokomafont{section}{\clearpage}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy
+
+% Setup hyperref package
+\hypersetup{
+    breaklinks=true,  % so long urls are correctly broken across lines
+    colorlinks=true,
+    urlcolor=urlcolor,
+    linkcolor=linkcolor,
+    citecolor=citecolor,
+    }
+
+% ensure figures are placed within subsections
+\makeatletter
+\AtBeginDocument{%
+    \expandafter\renewcommand\expandafter\subsection\expandafter
+    {\expandafter\@fb@secFB\subsection}%
+    \newcommand\@fb@secFB{\FloatBarrier
+    \gdef\@fb@afterHHook{\@fb@topbarrier \gdef\@fb@afterHHook{}}}%
+    \g@addto@macro\@afterheading{\@fb@afterHHook}%
+    \gdef\@fb@afterHHook{}%
+}
+\makeatother
+
+% number figures, tables and equations by section
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+\makeatletter
+\@addtoreset{table}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand\thetable{\thesection.\arabic{table}}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+    % set global options for float placement
+    \makeatletter
+        \providecommand*\setfloatlocations[2]{\@namedef{fps@#1}{#2}}
+    \makeatother
+
+% align captions to left (indented)
+\captionsetup{justification=raggedright,
+singlelinecheck=false,format=hang,labelfont={it,bf}}
+
+% shift footer down so space between separation line
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.oneside}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.oneside}
+\pagestyle{scrheadings}
+\clearscrheadfoot{}
+\ifoot{\leftmark}
+\renewcommand{\sectionmark}[1]{\markleft{\thesection\ #1}}
+\ofoot{\pagemark}
+\cfoot{}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% FINAL HEADER MATERIAL
+
+% clereref must be loaded after anything that changes the referencing system
+\usepackage{cleveref}
+\creflabelformat{equation}{#2#1#3}
+
+% make the code float work with cleverref
+\crefname{codecell}{code}{codes}
+\Crefname{codecell}{code}{codes}
+% make the text float work with cleverref
+\crefname{textcell}{text}{texts}
+\Crefname{textcell}{text}{texts}
+% make the text float work with cleverref
+\crefname{errorcell}{error}{errors}
+\Crefname{errorcell}{error}{errors}
+
+%%%%%%%%%%%%
+
+\begin{document}
+
+    \begin{titlepage}
+
+  \begin{center}
+
+  \vspace*{1cm}
+
+  \Huge\textbf{Overpressure Analysis of Girard Point Refinery Accident}
+
+  \vspace{0.5cm}\LARGE{Boiling-Liquid Expanding-Vapor Explosion}
+
+  \vspace{1.5cm}
+
+  \begin{minipage}{0.8\textwidth}
+    \begin{center}
+    \begin{minipage}{0.39\textwidth}
+    \begin{flushleft} \Large
+    \emph{\GetTranslation{Author}:}\\S. Kevin McNeill\\\href{mailto:shonn.mcneill@atf.gov}{shonn.mcneill@atf.gov}
+    \end{flushleft}
+    \end{minipage}
+    \hspace{\fill}
+    \begin{minipage}{0.39\textwidth}
+    \begin{flushright} \Large
+    \end{flushright}
+    \end{minipage}
+    \end{center}
+  \end{minipage}
+
+  \vfill
+
+  \begin{minipage}{0.8\textwidth}
+  \begin{center}
+  \end{center}
+  \end{minipage}
+
+  \vspace{0.8cm}
+      \LARGE{National Center for Explosives Training and Research}\\
+      \LARGE{Explosives Research and Development Division}\\
+
+  \vspace{0.4cm}
+
+  \today
+
+  \end{center}
+  \end{titlepage}
+
+    \begingroup
+    \let\cleardoublepage\relax
+    \let\clearpage\relax\tableofcontents
+    \endgroup
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+On June 21, 2019, an fire and explosion occurred at the Girard Point
+Refinery owned by Philadelphia Energy Solutions \cite{Renshaw2019}. One
+of the three explosions observed was from an a treater-feed-surge-drum
+tank in the alkylation unit. The tank was propelled approximately 2,000
+ft from the blast seat. The Philadelphia Fire Department requested ATF
+estimate the blast overpressure generated when the tank exploded.
+
+It is hypothesized that a boiling-liquid expanding-vapor explosion
+(BLEVE) event provided the energy to generate the blast wave. This paper
+is an engineering analysis to estimate the blast overpressure. The
+analysis is based upon an adiabatic and isentropic energy analysis
+developed by the Center for Chemical Process Safety \cite{Safety2010}.
+
+\hypertarget{background}{%
+\subsection{Background}\label{background}}
+
+The Girard Point Refinery is located in southwest Philadelphia,
+Pennsylvania, on the Schuylkill River, see \cref{fig:map}. The refinery
+produces 335,000 bpd of gasoline and is the largest on the East Coast.
+The treater-feed-surge-drum involved in the explosion is part of the
+alkylation process used in the production of gasoline.
+
+\begin{figure}[H]
+\hypertarget{fig:map}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{refinery_alkylation_bleve_files/map.jpeg}
+\end{center}
+\caption{Map of Girard Point Refinery show the blast location
+\cite{Duchneskie2019}.}\label{fig:map}
+}
+\end{figure}
+
+The alkylaition process converts propylene \((C_3H_6)\), butylene
+\((C_4H_8)\), pentene \((C_5H_{10})\), and isobutane \((C_3H_{10})\) to
+alkane liquids such as isoheptane \((C_7H_{16})\) and isooctane
+\((C_8H_{16})\). These Alkylates are a highly valued component in the
+production of gasoline because of there high octane and low vapor
+pressure \cite{flowserve2000}. The treater-feed-surge-drum provides a
+temporary storage location for feed material during the production
+process or during maintenance.
+
+The tank weighed 74,660 lb and contained 98,874 lb of butane (50\%) and
+butene (40\%) and other lesser constituients, see Table
+\cref{tbl:chemicals_in_tank}.
+
+\begin{longtable}[]{@{}rr@{}}
+\caption{Sample of Chemical Contents in the Treater-Feed-Surge-Drum
+Closest to the Time of the Explosion
+\label{tbl:chemicals_in_tank}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Chemical\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Percent by Volume\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Chemical\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedleft
+Percent by Volume\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+methane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.01\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+ethylene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+ethane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.01\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+propane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.90\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+propylene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.10\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+isobutane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+37.28\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+nbutane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+12.81\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+butens\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+40.41\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+neopentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+isopentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+3.94\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+npentane\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.25\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+butadiene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.33\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+benzene\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.00\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C5 olefins\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+3.54\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C6 sats\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.33\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.19\columnwidth}\raggedleft
+C7+\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
+0.04\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The treater-feed-surge-drum tank that exploded is part of the refineries
+alkylation unit. T This analysis calculates the pressure of the
+blastwave generated from the BLEVE by finding the \#\#\# Boiling-Liquid
+Expanding-Vapor Explosion A BLEVE results from the sudden failure of a
+tank containing a compressed vapor (head space) and a super-heated
+liquid (a liquid heated above it's boiling point but without boiling).
+The magnitude of the blast depends on how super-heated the liquid was at
+failure. As the level of super-heat rises, the portion of liquid that
+flash-boils rises, thus increasing the energy released. Once containment
+failure occurs the energy is distributed into four forms:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Overpressure wave
+\item
+  Kinetic energy of fragments
+\item
+  Deformation and failure of the containment material
+\item
+  Heat transferred to environment
+\end{enumerate}
+
+The distribution of the energy into the these four forms depends on the
+specifics of the explosion. Casal et al.~found that a \emph{fragile}
+failure releases 80\% of the energy into the blastwave, while a
+\emph{ductile} failure releases 40\% of the energy into the blastwave.
+The remaining energy becomes kinetic energy of the fragments. The heat
+transfer to the environment is relatively small.{[}2{]} In practice most
+pressure vessels are designed with materials that are ductile rather
+than brittle to avoid sudden and catastrophic brittle (fragile) failures
+{[}3{]}.
+
+\hypertarget{first-law-of-thermodynamics}{%
+\subsection{First Law of
+Thermodynamics}\label{first-law-of-thermodynamics}}
+
+The 1st Law of Thermodynamics is a restatement of the conservation of
+energy (energy cannot be created or destroyed). A way of stating the
+first law of thermodynamics is the internal energy \((\Delta U)\) of a
+system is given by the sum of the heat \((Q)\) that flows into and
+out-of the system and the work \((W)\) done on the system:
+
+\begin{equation}\Delta U = Q+W\end{equation}
+
+Therefore, there are only two ways to change the internal energy
+\(\Delta U\) of the system:
+
+\begin{itemize}
+\tightlist
+\item
+  Add or remove heat from the system, \(Q\).
+\item
+  Perform or extract work from the system, \(W\).
+\end{itemize}
+
+It is assumed for this analysis the BLEVE expansion of the super-heated
+liquid (initial state) to atmospheric conditions (final state) occurs so
+quickly there is no time for heat to be added or removed from the
+system. When heat cannot be added or removed from a system it is called
+an adiabatic process. During an adiabatic process the heat \((Q)\) is
+zero and the 1st Law of Thermodynamics can be rewritten to:
+
+\begin{equation}\Delta U = W\end{equation} \#\# Work The work \(W\) of
+an expanding gas is given by,
+
+\begin{equation}W = P_0\Delta V\end{equation}
+
+Where \(P_0\) is the initial pressure and \(\Delta V\) is the difference
+in the final and initial volumes. In the case of the BLEVE the change in
+volume is due to the conversion of the super-heated liquid to a gas. We
+know the initial volume of the system, \(V_i\) in this case, the tank
+volume. However, the final volume, \(V_f\), is an unknown. We can
+however transform the final volume into terms we do know. If we rewrite
+the final volume \((V_f)\) in terms of the specific volume (volume
+divided by mass) times the mass we can transform our change in final
+volume into a change in final mass,
+
+\begin{equation}\Delta V =  V_f - V_i\end{equation}
+\begin{equation}\Delta V =  \left(\nu_Gm_G + \nu_Lm_L \right)_f - V_i\end{equation}
+
+Therefore,
+
+\begin{equation}W = P_0\left[\left(\nu_Gm_G + \nu_Lm_L \right)_f - V_i\right]\end{equation}
+
+The quality of a gas-liquid mixture is defined as the fraction of the
+total mass (gas + liquid) that is saturated vapor,
+
+\begin{equation}\chi = \frac{m_G}{m_T}\end{equation}
+
+Where \(m_G\) is the mass of the gas and \(m_T\) is the total mass.
+Solving for the mass of the gas,
+
+\begin{equation}m_G = m_T \chi\end{equation}
+
+The mass of the liquid is then given by,
+
+\begin{equation}m_T = m_G + m_L\end{equation}
+\begin{equation}m_L = m_T - m_G\end{equation}
+\begin{equation}m_L = m_T - m_T \chi\end{equation}
+
+Substituting equations (7) and (10) back into (5) we have,
+
+\begin{equation}W = P_0\left[\left( \nu_G m_T \chi + \nu_L(m_T - m_T \chi) \right)_f - V_i\right]\end{equation}
+\begin{equation}W = P_0\left[\left( \nu_G m_T \chi + \nu_L m_T - \nu_L m_T \chi \right)_f - V_i\right]\end{equation}
+\begin{equation}W = P_0\left[\left( \left(\nu_G - \nu_L \right) m_T \chi + \nu_L m_T \right)_f - V_i\right]\end{equation}
+
+\hypertarget{internal-energy}{%
+\subsection{Internal Energy}\label{internal-energy}}
+
+The internal energy is the energy of atomic motion. It is the sum of the
+molecular kinetic and potential energies in a system (in our case, the
+tank filled with fluid). The molecular kinetic energy is made up of
+three types of molecular motion:
+
+\begin{itemize}
+\tightlist
+\item
+  translational,
+\item
+  rotational, and
+\item
+  vibrational.
+\end{itemize}
+
+The molecular potential energy is derived from the electromagnetic force
+that exists between the atoms in individual molecules and the
+intermolecular forces between molecules. The internal energy is directly
+proportional to the temperature of the system (higher temperatures mean
+more internal energy and lower temperatures mean lower internal energy).
+
+The change in internal energy can be changed similarly to how we change
+the volume in the Work section. The change in internal energy can be
+rewritten in terms of the specific internal energy (internal energy
+divided by the mass) and the quality,
+
+\begin{equation}\Delta U = U_f - U_i\end{equation}
+
+\begin{equation}\Delta U = \left(u_Gm_G + u_Lm_L\right)_f - U_i\end{equation}
+
+Substituting equations (7) and (10) into the internal energy equation
+(15) we have,
+
+\begin{equation}\Delta U = \left(u_Gm_T\chi + u_L(m_T - m_T \chi)\right)_f - U_i\end{equation}
+
+\begin{equation}\Delta U = \left( u_G m_T \chi + u_L m_T - u_L m_T \chi \right)_f - U_i\end{equation}
+
+\begin{equation}\Delta U = \left( \left(u_G - u_L \right) m_T \chi + u_L m_T \right)_f - U_i\end{equation}
+
+Referring back to equation (3) and substituting equations (14) and (19)
+we can solve for the quality \(\chi\),
+
+\begin{equation}\chi = \frac{m_TP_0\nu_L-V_iP_0+m_Tu_L-U_i}{\left[(u_L-u_G)-(\nu_G-\nu_L)P_0 \right]m_T}\end{equation}
+
+By substituting \(\chi\) back into equation (19) we can solve for the
+internal energy, \(\Delta U\). Once we know the change in internal
+energy due to the flash-boiling we can calculate the equivalent weight
+of TNT that will produce the same change in internal energy.
+
+\hypertarget{conversion-to-tnt-equivalent-weight}{%
+\subsection{Conversion to TNT Equivalent
+Weight}\label{conversion-to-tnt-equivalent-weight}}
+
+The equation for the conversion to equivalent TNT weight in kilograms
+is,
+
+\begin{equation}W_{TNT} = \beta\: 0.2136 \Delta U\end{equation}
+
+Where: - \(\beta\) is the fraction of the energy released converted to
+the blast wave (fragile = 80\% and ductile = 40\%) -
+\(0.2136\frac{kg}{MJ}\) is the inverse of blast energy of TNT
+\(\left(4680\:J/g_{TNT}\right)\)\href{https://books.google.com/books?id=Id15BgAAQBAJ\&pg=PA2\&lpg=PA2\&dq=tnt+4680+J/g\&source=bl\&ots=qx-7s6EAHa\&sig=ACfU3U1wcca5cWLX38lBoxDvvRqH0uaZ5g\&hl=en\&sa=X\&ved=2ahUKEwiN2cDP1pHjAhWnm-AKHfBYCGkQ6AEwAHoECAkQAQ\#v=onepage\&q=tnt\%204680\%20J\%2Fg\&f=false}{4}
+- \(\Delta U\) is the internal energy of the flash boiling liquid in
+\(bar\:m^3\).
+
+With the weight of TNT known it is a simple matter to calculate the
+overpressure at a specific distance from the BLEVE using the Kingery
+Bulmash equations {[}5{]}.
+
+\hypertarget{notebook-imports}{%
+\section{Notebook Imports}\label{notebook-imports}}
+
+\hypertarget{thermodynamic-data}{%
+\section{Thermodynamic Data}\label{thermodynamic-data}}
+
+\hypertarget{pressure-at-state-1-pre-failure-state}{%
+\subsection{Pressure at State 1 (Pre-failure
+State)}\label{pressure-at-state-1-pre-failure-state}}
+
+The drum (tank) is assumed to fail at \(1.21\) times the opening
+pressure of the pressure relief valve (PRV)\cite{Engineers2013}. The PRV
+was set to open at \(15\:MPa\) therefore, the absolute pressure at state
+1 (failure state) is given by,
+
+\begin{equation}p_1 = 1.21\left(p_{PRV}+p_{atm}\right)\end{equation}
+\begin{equation}p_1 = 1.21\left(1500000+101325\right)\end{equation}
+\begin{equation}p_1 = 1.916\:MPa\end{equation}
+
+\hypertarget{pressure-at-state-2-final-expanded-state}{%
+\subsection{Pressure at State 2 (Final Expanded
+State)}\label{pressure-at-state-2-final-expanded-state}}
+
+The pressure at state 2 (final expanded state) is standard atmospheric
+pressure or \(0.101\:MPa\). The other state variables can be determined
+based on the ``saturated'' state of the propane inside the tank and the
+known pressures. The thermodynamic data for states 1 and 2 is summarized
+in Table (\cref{tbl:thermo}).
+
+\begin{table}[H]
+\caption{Propane Thermodynamic Data for Inital (1) and Final (2) States}\label{tbl:thermo}
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+{} &  $P \left(kPa\right)$ &  $h_f \left(\frac{kJ}{kg}\right)$ &  $h_g \left(\frac{kJ}{kg}\right)$ &  $v_f \left(\frac{m^3}{kg}\right)$ &  $v_g \left(\frac{m^3}{kg}\right)$ &  $u_f \left(\frac{kJ}{kg\:K}\right)$ &  $u_g \left(\frac{kJ}{kg\:K}\right)$ &  $s_f \left(\frac{kJ}{kg\:K}\right)$ &  $s_g \left(\frac{kJ}{kg\:K}\right)$ \\
+State &                       &                                   &                                   &                                    &                                    &                                      &                                      &                                      &                                      \\
+\midrule
+1     &            1937.60325 &                     354584.413136 &                     625197.730383 &                           0.002287 &                           0.022459 &                           350.152477 &                           581.681515 &                             1.503188 &                             2.325970 \\
+2     &             101.32500 &                     100356.292970 &                     525947.893053 &                           0.001722 &                           0.413884 &                           100.181860 &                           484.011098 &                             0.607045 &                             2.449144 \\
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\end{table}
+
+\hypertarget{internal-energy-at-states-1-and-2}{%
+\section{Internal Energy at States 1 and
+2}\label{internal-energy-at-states-1-and-2}}
+
+\hypertarget{internal-energy-at-state-1}{%
+\subsection{Internal Energy at State
+1}\label{internal-energy-at-state-1}}
+
+The internal energy at at state 1 (saturated) is calculated from,
+
+\begin{equation}h = u + pv\end{equation}
+
+where \(h\) is the enthalpy, \(p\) is the pressure, and \(v\) is the
+specific volume. Therefore, for state 1 (fluid and gas) we have,
+
+\begin{equation}u = h - pv\end{equation}
+
+\begin{equation}u_{1f} = h_{1f} - p_1v_{1f}\end{equation}
+\begin{equation}u_{1f} = 354584.4 - (1937.603\:kPa)(0.002287\:m^3/kg)\end{equation}
+\begin{equation}u_{1f} = 350.15\:kJ/kg\end{equation}
+
+\begin{equation}u_{1g} = h_{1g} - p_1v_{1g}\end{equation}
+\begin{equation}u_{1g} = 100356.29 - (101.325\:kPa)(0.001722\:m^3/kg)\end{equation}
+\begin{equation}u_{1g} = 581.68\:kJ/kg\end{equation}
+
+and similarly for state 2,
+
+\begin{equation}u_{2f} = 100.18\:kJ/kg\end{equation}
+\begin{equation}u_{2g} = 484.01\:kJ/kg\end{equation}
+
+\hypertarget{internal-energy-at-state-2}{%
+\subsection{Internal Energy at State
+2}\label{internal-energy-at-state-2}}
+
+When the drum breaks and the propane at state 1 expands to state 2
+(atmospheric pressure) some of the liquid propane vaporizes and some of
+the gaseous propane condenses. Therefore unlike at the saturated state
+1, there is both vapor and fluid present. We can calculate the vapor
+present using the vapor quality \((\chi)\), from,
+
+\begin{equation}\chi = \frac{\nu_{tot} - \nu_f}{\nu_g-\nu_f}\end{equation}
+
+where \(\nu\) is the specific gravity. This equation is also true for
+the entropy \((s)\), internal energy \((u)\), and enthalpy \((h)\).
+Using the entropy \((s)\) we can calculate the quality of the saturated
+liquid and vapor as the propane transitions from state 1 to state 2.
+Therefore, the liquid vapor quality at state 2 is given by s
+
+\begin{equation}\chi_f = \frac{s_{f1} - s_{f2}}{s_{g2}-s_{f2}}\end{equation}
+
+\begin{equation}\chi_f = \frac{1.503188 - 0.607045}{2.449144-0.607045}\end{equation}
+
+\begin{equation}\chi_f = 0.4865\end{equation}
+
+and for the vapor at state 2,
+
+\begin{equation}\chi_g = \frac{s_{g2} - s_{g1}}{s_{g2}-s_{f2}}\end{equation}
+
+\begin{equation}\chi_g= \frac{2.449144 - 2.325970}{2.449144-0.607045}\end{equation}
+
+\begin{equation}\chi_g = 0.06687\end{equation}
+
+We can then calculate the internal energy at state 2 using,
+
+\begin{equation}u_{2-fluid} = (1-\chi_f)u_{f2} + \chi_f u_{g2}\end{equation}
+\begin{equation}u_{2-vapor} = (1-\chi_g)u_{g2} + \chi_g u_{f2}\end{equation}
+
+\begin{equation}u_{2-fluid} = (1-0.4865)100.1818 + (0.4865)(484.0111)\end{equation}
+\begin{equation}u_{2-vapor} = (1-0.0668)484.0111 + (0.0668)(100.1818)\end{equation}
+
+\begin{equation}u_{2-fluid} = 286.9068\:kJ/kg\end{equation}
+\begin{equation}u_{2-vapor} = 458.3459\:kJ/kg\end{equation}
+
+\hypertarget{the-specific-work}{%
+\section{The Specific Work}\label{the-specific-work}}
+
+The work that the expanding vapor and fluid can perform is the
+difference between the initial (1) and final (2) states,
+
+\begin{equation}e_{ex} = u_1 - u_2\end{equation}
+
+for the saturated fluid we have,
+
+\begin{equation}e_{exf} = u_{f1} - u_{2-fluid}\end{equation}
+\begin{equation}e_{exf} = 350.15 - 286.91\end{equation}
+\begin{equation}e_{exf} = 63.25\:kJ/kg\end{equation}
+
+and for the vapor,
+
+\begin{equation}e_{exg} = u_{g1} - u_{2-vapor}\end{equation}
+\begin{equation}e_{exg} = 581.68 - 458.35\end{equation}
+\begin{equation}e_{exg} = 123.34\:kJ/kg\end{equation}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+(8743.821988545078, 222.63002781996232)
+\end{lstlisting}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+(1106018.0441464642, 54916.43853777208)
+\end{lstlisting}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+1160934.4826842363
+\end{lstlisting}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+(4.441950730199333, 19.12265729089563)
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrl}
+\toprule
+{} &         P &         R &    w &            z \\
+\midrule
+0 &  3.128611 &  0.238936 &  5.0 &  $p/p_0=5.0$ \\
+1 &  3.118639 &  0.252979 &  5.0 &  $p/p_0=5.0$ \\
+2 &  3.106715 &  0.270923 &  5.0 &  $p/p_0=5.0$ \\
+3 &  3.094836 &  0.290141 &  5.0 &  $p/p_0=5.0$ \\
+4 &  3.086942 &  0.303704 &  5.0 &  $p/p_0=5.0$ \\
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\end{table}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+array(0.06403677)
+\end{lstlisting}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{refinery_alkylation_bleve_files/output_16_1.png}\end{center}\end{figure}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+(5876.85, 9.40580773951352)
+\end{lstlisting}
+
+\hypertarget{cleanup-data}{%
+\section{Cleanup Data}\label{cleanup-data}}
+
+Like families, tidy datasets are all alike but every messy dataset is
+messy in its own way. Tidy datasets provide a standardized way to link
+the structure of a dataset (its physical layout) with its semantics (its
+meaning). In this section, I'll provide some standard vocabulary for
+describing the structure and semantics of a dataset, and then use those
+definitions to define tidy data.
+\href{https://tidyr.tidyverse.org/articles/tidy-data.html}{tidyr}
+
+\hypertarget{analysismodeling}{%
+\section{Analysis/Modeling}\label{analysismodeling}}
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\begin{itemize}
+\tightlist
+\item
+  Focus on main analysis steps and findings
+\item
+  Remove intermediate results or move to supplement
+\end{itemize}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\bibliographystyle{unsrtnat}
+\bibliography{refinery_alkylation_bleve_files/library}
+
+\end{document}

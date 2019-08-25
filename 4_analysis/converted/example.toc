@@ -1,0 +1,11 @@
+\babel@toc {british}{}
+\contentsline {section}{\numberline {1}Markdown}{3}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}General}{3}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}References and Citations}{3}{subsection.1.2}% 
+\contentsline {subsection}{\numberline {1.3}Todo notes}{3}{subsection.1.3}% 
+\contentsline {section}{\numberline {2}Text Output}{4}{section.2}% 
+\contentsline {section}{\numberline {3}Images and Figures}{5}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Displaying a plot with its code}{7}{subsection.3.1}% 
+\contentsline {section}{\numberline {4}Tables (with pandas)}{9}{section.4}% 
+\contentsline {section}{\numberline {5}Equations (with ipython or sympy)}{10}{section.5}% 
+\contentsline {section}{\numberline {6}Embed interactive HTML (like ipywidgets)}{11}{section.6}% 

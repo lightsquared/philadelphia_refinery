@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: refinery_alkylation_bleve.aux
+The style file: unsrtnat.bst
+Database file #1: refinery_alkylation_bleve_files/library.bib
+You've used 5 entries,
+            2481 wiz_defined-function locations,
+            588 strings with 5573 characters,
+and the built_in function-call counts, 1393 in all, are:
+= -- 116
+> -- 43
+< -- 5
++ -- 22
+- -- 12
+* -- 70
+:= -- 224
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 9
+chr.to.int$ -- 5
+cite$ -- 5
+duplicate$ -- 80
+empty$ -- 151
+format.name$ -- 19
+if$ -- 300
+int.to.chr$ -- 1
+int.to.str$ -- 6
+missing$ -- 4
+newline$ -- 34
+num.names$ -- 15
+pop$ -- 56
+preamble$ -- 1
+purify$ -- 5
+quote$ -- 0
+skip$ -- 57
+stack$ -- 0
+substring$ -- 10
+swap$ -- 11
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 29
+warning$ -- 0
+while$ -- 10
+width$ -- 0
+write$ -- 72

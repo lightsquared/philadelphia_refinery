@@ -1,0 +1,83 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Renshaw and DiNapoli(2019)]{Renshaw2019}
+Jarrett Renshaw and Jessica DiNapoli.
+\newblock {Unit at Philadelphia refinery completely destroyed in fire}, 2019.
+\newblock URL
+  \url{https://www.reuters.com/article/us-usa-refinery-blast/unit-at-philadelphia-refinery-completely-destroyed-in-fire-sources-idUSKCN1TO0SZ}.
+
+\bibitem[{Safety Center for Chemical Process}(2010)]{Safety2010}
+{Safety Center for Chemical Process}.
+\newblock \emph{{Guidelines for Vapor Cloud Explosion, Pressure Vessel Burst,
+  BLEVE, and Flash Fire Hazards}}.
+\newblock John Wiley {\&} Sons, Ltd, Hoboken, 2nd edition, 2010.
+\newblock ISBN 978-0-470-25147-8.
+
+\bibitem[Maykuth et~al.(2019)Maykuth, Solutions, and Philadelphia]{Maykuth2019}
+A~M~Andrew Maykuth, Philadelphia~Energy Solutions, and South Philadelphia.
+\newblock {Philadelphia Energy Solutions to close refinery damaged by fire ;
+  gas prices spike}, jun 2019.
+
+\bibitem[Malone(2019)]{Malone2019}
+Gary~S. Malone.
+\newblock {Email: Philadelphia Refinery Explosion (Tank Piece 2)}, 2019.
+
+\bibitem[{Associated Press}(2019)]{AssociatedPress2019}
+{Associated Press}.
+\newblock {Biggest oil refinery on the East Coast closes after explosive fire -
+  MarketWatch}, 2019.
+\newblock URL
+  \url{https://www.marketwatch.com/story/biggest-oil-refinery-on-the-east-coast-closes-after-explosive-fire-2019-06-26}.
+
+\bibitem[Duchneskie(2019)]{Duchneskie2019}
+John Duchneskie.
+\newblock {Image From: Philadelphia Energy Solutions to close refinery damaged
+  by fire; gas prices spike}, jun 2019.
+\newblock URL
+  \url{https://www.inquirer.com/business/philadelphia-refinery-fire-plan-to-close-20190626.html}.
+
+\bibitem[{Flowserve Corporation}(2000)]{flowserve2000}
+{Flowserve Corporation}.
+\newblock {Refinery Processes Industry Guide}, 2000.
+\newblock URL \url{https://pro-quip.com/images/proquip/PDFs/Refining Industry
+  Guide.pdf}.
+
+\bibitem[Temur et~al.(2014)Temur, Avcilar, {\"{O}}zinan, and
+  Karakaya]{Temur2014}
+T.~Temur, E.~Avcilar, E.~{\"{O}}zinan, and M.~Karakaya.
+\newblock {Reduce LPG Sulfur with a ‘rules of thumb' Checklist}.
+\newblock \emph{Gas Processing {\&} LNG}, jun 2014.
+
+\bibitem[{Philadelphia Energy Solutions}(2019)]{PES2019}
+{Philadelphia Energy Solutions}.
+\newblock {Letter: July 11, 2019 ATF Information Request}, 2019.
+
+\bibitem[Planas-Cuchi et~al.(2004)Planas-Cuchi, Salla, and Casal]{Planas2004}
+E.~Planas-Cuchi, J.~M. Salla, and J.~Casal.
+\newblock {Calculating overpressure from BLEVE explosions}.
+\newblock \emph{Journal of Loss Prevention in the Process Industries},
+  17\penalty0 (6):\penalty0 431--436, 2004.
+\newblock ISSN 09504230.
+\newblock \doi{10.1016/j.jlp.2004.08.002}.
+
+\bibitem[Benac et~al.(2016)Benac, Cherolis, and Wood]{Benac2016}
+Daniel~J. Benac, Nicholas Cherolis, and David Wood.
+\newblock {Managing Cold Temperature and Brittle Fracture Hazards in Pressure
+  Vessels}.
+\newblock \emph{Journal of Failure Analysis and Prevention}, 16\penalty0
+  (1):\penalty0 55--66, 2016.
+\newblock ISSN 15477029.
+\newblock \doi{10.1007/s11668-015-0052-3}.
+
+\bibitem[Engineers(2013)]{Engineers2013}
+American Society of~Mechanical Engineers.
+\newblock \emph{{Boiler and Pressure Vessel Code, Section III, Rules for
+  Construction of Pressure Vessels}}.
+\newblock ASME, New York, NY, 2013.
+
+\end{thebibliography}
