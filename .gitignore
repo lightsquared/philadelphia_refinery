@@ -100,8 +100,4 @@ venv.bak/
 # mkdocs documentation
 /site
 
-# mypy
-.mypy_cache/
-0_research/PES Refinery Explosion/Drone Videos (6-21-19)/Drone Flir (PES-ATF-000002)/100MEDIA/DJI_0001.mov
-*.mov
-*.mp4
+.DS_Store

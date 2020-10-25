@@ -1,22 +1,9 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[Renshaw and DiNapoli(2019)]{Renshaw2019}
-Jarrett Renshaw and Jessica DiNapoli.
-\newblock {Unit at Philadelphia refinery completely destroyed in fire}, 2019.
-\newblock URL
-  \url{https://www.reuters.com/article/us-usa-refinery-blast/unit-at-philadelphia-refinery-completely-destroyed-in-fire-sources-idUSKCN1TO0SZ}.
-
-\bibitem[{Safety Center for Chemical Process}(2010)]{Safety2010}
-{Safety Center for Chemical Process}.
-\newblock \emph{{Guidelines for Vapor Cloud Explosion, Pressure Vessel Burst,
-  BLEVE, and Flash Fire Hazards}}.
-\newblock John Wiley {\&} Sons, Ltd, Hoboken, 2nd edition, 2010.
-\newblock ISBN 978-0-470-25147-8.
 
 \bibitem[Maykuth(2019)]{Maykuth2019}
 Andrew Maykuth.
@@ -24,25 +11,12 @@ Andrew Maykuth.
   gas prices spike}.
 \newblock \emph{Philadelphia Inquirer}, jun 2019.
 
-\bibitem[{Associated Press}(2019)]{AssociatedPress2019}
-{Associated Press}.
-\newblock {Biggest oil refinery on the East Coast closes after explosive fire -
-  MarketWatch}, 2019.
-\newblock URL
-  \url{https://www.marketwatch.com/story/biggest-oil-refinery-on-the-east-coast-closes-after-explosive-fire-2019-06-26}.
-
 \bibitem[Duchneskie(2019)]{Duchneskie2019}
 John Duchneskie.
 \newblock {Image From: Philadelphia Energy Solutions to close refinery damaged
   by fire; gas prices spike}, jun 2019.
 \newblock URL
   \url{https://www.inquirer.com/business/philadelphia-refinery-fire-plan-to-close-20190626.html}.
-
-\bibitem[{Flowserve Corporation}(2000)]{flowserve2000}
-{Flowserve Corporation}.
-\newblock {Refinery Processes Industry Guide}, 2000.
-\newblock URL \url{https://pro-quip.com/images/proquip/PDFs/Refining Industry
-  Guide.pdf}.
 
 \bibitem[Temur et~al.(2014)Temur, Avcilar, {\"{O}}zinan, and
   Karakaya]{Temur2014}
@@ -59,22 +33,78 @@ Gary~S. Malone.
 {Philadelphia Energy Solutions}.
 \newblock {Letter: July 11, 2019 ATF Information Request}, 2019.
 
-\bibitem[{National Center for Biotechnology
-  Information}({\natexlab{a}})]{PubChem-butane}
-{National Center for Biotechnology Information}.
-\newblock {PubChem Database. Butane, CID = 7843}, {\natexlab{a}}.
-\newblock URL \url{https://pubchem.ncbi.nlm.nih.gov/compound/Butane}.
-
-\bibitem[{National Center for Biotechnology
-  Information}({\natexlab{b}})]{PubChem-butene}
-{National Center for Biotechnology Information}.
-\newblock {PubChem Database. Butene, CID=7844}, {\natexlab{b}}.
-\newblock URL \url{https://pubchem.ncbi.nlm.nih.gov/compound/1-Butene}.
-
 \bibitem[Malone(2019{\natexlab{b}})]{Malone2019a}
 Gary~S. Malone.
 \newblock {Documents, Video, and Photographs (mailed thumb drive)},
   2019{\natexlab{b}}.
+
+\bibitem[{Safety Center for Chemical Process}(2010)]{Safety2010}
+{Safety Center for Chemical Process}.
+\newblock \emph{{Guidelines for Vapor Cloud Explosion, Pressure Vessel Burst,
+  BLEVE, and Flash Fire Hazards}}.
+\newblock John Wiley {\&} Sons, Ltd, Hoboken, 2nd edition, 2010.
+\newblock ISBN 978-0-470-25147-8.
+
+\bibitem[{National Center for Biotechnology
+  Information}(2019{\natexlab{a}})]{PubChem-butane}
+{National Center for Biotechnology Information}.
+\newblock {PubChem Database. Butane, CID = 7843}, 2019{\natexlab{a}}.
+\newblock URL \url{https://pubchem.ncbi.nlm.nih.gov/compound/Butane}.
+
+\bibitem[{National Center for Biotechnology
+  Information}(2019{\natexlab{b}})]{PubChem-butene}
+{National Center for Biotechnology Information}.
+\newblock {PubChem Database. Butene, CID=7844}, 2019{\natexlab{b}}.
+\newblock URL \url{https://pubchem.ncbi.nlm.nih.gov/compound/1-Butene}.
+
+\bibitem[{National Fire Protection Association}(2014)]{nfpa_921_2014}
+{National Fire Protection Association}.
+\newblock {NFPA 921 Guide for Fire and Explosion Investigations}.
+\newblock \emph{NFPA 921 Guide for Fire and Explosion Investigations}, page
+  268, 2014.
+\newblock \doi{1/9972545001}.
+\newblock URL
+  \url{http://www.sierragal.com/252{\%}7B{\_}{\%}7Dstuff/NFPA{\%}7B{\_}{\%}7D921.pdf}.
+
+\bibitem[O'Sullivan and Jagger(2004)]{OSullivan2004}
+S~O'Sullivan and S~Jagger.
+\newblock {Human vulnerability to thermal radiation offshore}.
+\newblock Technical report, Health and Safety Laboratory, Derbyshire, UK, 2004.
+
+\bibitem[Renshaw and DiNapoli(2019)]{Renshaw2019}
+Jarrett Renshaw and Jessica DiNapoli.
+\newblock {Unit at Philadelphia refinery completely destroyed in fire}, 2019.
+\newblock URL
+  \url{https://www.reuters.com/article/us-usa-refinery-blast/unit-at-philadelphia-refinery-completely-destroyed-in-fire-sources-idUSKCN1TO0SZ}.
+
+\bibitem[Sewell et~al.(2019)Sewell, Evans, and Jones]{Sewell2019}
+Chris Sewell, Oliver Evans, and Katie Jones.
+\newblock ipypublish.
+\newblock \emph{Software on Zenodo}, 2019.
+\newblock \doi{10.5281/zenodo.3386219}.
+\newblock URL \url{https://zenodo.org/record/3386219}.
+
+\bibitem[Kluyver et~al.(2019)Kluyver, Ragan-Kelley, Perez, Granger, Bussonnier,
+  Frederic, Kelley, Hamrick, Grout, Corlay, Ivanov, Avila, Abdalla, and
+  Willing]{Kluyver2019}
+T~Kluyver, B.~Ragan-Kelley, F.~Perez, B.~Granger, M.~Bussonnier, J.~Frederic,
+  K.~Kelley, J.~Hamrick, J.~Grout, S.~Corlay, P.~Ivanov, D.~Avila, S.~Abdalla,
+  and C.~Willing.
+\newblock {Jupyter Notebooks – a publishing format for reproducible
+  computational workflows}, 2019.
+
+\bibitem[{Associated Press}(2019)]{AssociatedPress2019}
+{Associated Press}.
+\newblock {Biggest oil refinery on the East Coast closes after explosive fire -
+  MarketWatch}, 2019.
+\newblock URL
+  \url{https://www.marketwatch.com/story/biggest-oil-refinery-on-the-east-coast-closes-after-explosive-fire-2019-06-26}.
+
+\bibitem[{Flowserve Corporation}(2000)]{flowserve2000}
+{Flowserve Corporation}.
+\newblock {Refinery Processes Industry Guide}, 2000.
+\newblock URL \url{https://pro-quip.com/images/proquip/PDFs/Refining Industry
+  Guide.pdf}.
 
 \bibitem[Planas-Cuchi et~al.(2004)Planas-Cuchi, Salla, and Casal]{Planas2004}
 E.~Planas-Cuchi, J.~M. Salla, and J.~Casal.
@@ -98,5 +128,11 @@ American Society of~Mechanical Engineers.
 \newblock \emph{{Boiler and Pressure Vessel Code, Section III, Rules for
   Construction of Pressure Vessels}}.
 \newblock ASME, New York, NY, 2013.
+
+\bibitem[Moore(1967)]{moore1967}
+C.~V. Moore.
+\newblock {The design of barricades for hazardous pressure systems}.
+\newblock \emph{Nuclear Engineering and Design}, 5\penalty0 (1):\penalty0
+  81--97, 1967.
 
 \end{thebibliography}

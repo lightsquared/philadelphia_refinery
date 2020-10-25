@@ -18,6 +18,10 @@
 toc=sectionentrywithdots,
 bibliography=totocnumbered,
 captions=tableheading,numbers=noendperiod]{scrartcl}
+%\usepackage{polyglossia}
+%\setmainlanguage{american}
+%\DeclareTextCommandDefault{\nobreakspace}{\leavevmode\nobreak\ }
+\usepackage[american]{babel}
 
 %%%%%%%%%%%%
 
@@ -70,7 +74,7 @@ captions=tableheading,numbers=noendperiod]{scrartcl}
 \usepackage[footsepline=0.25pt]{scrlayer-scrpage}
 
 % bibliography formatting
-\usepackage[sort,super]{natbib}
+\usepackage[numbers, square, super, sort&compress]{natbib}
 % hyperlink doi's
 \usepackage{doi}
 
@@ -425,14 +429,17 @@ singlelinecheck=false,format=hang,labelfont={it,bf}}
 \begin{document}
 
     \begin{titlepage}
+  \begin{flushright}
+    \includegraphics[width=0.7\textwidth]{philadelphia_refinery_files/fig_NCETR.png}
+  \end{flushright}
 
   \begin{center}
 
   \vspace*{1cm}
 
-  \Huge\textbf{Overpressure Analysis of Girard Point Refinery Accident}
+  \Huge\textbf{Analysis of the Fire and Explosion at the Girard Point Refinery}
 
-  \vspace{0.5cm}\LARGE{Boiling-Liquid Expanding-Vapor Explosion}
+  \vspace{0.5cm}\LARGE{Boiling Liquid Expanding Vapor Explosion}
 
   \vspace{1.5cm}
 
@@ -440,7 +447,7 @@ singlelinecheck=false,format=hang,labelfont={it,bf}}
     \begin{center}
     \begin{minipage}{0.39\textwidth}
     \begin{flushleft} \Large
-    \emph{\GetTranslation{Author}:}\\S. Kevin McNeill\\\href{mailto:shonn.mcneill@atf.gov}{shonn.mcneill@atf.gov}
+    \emph{\GetTranslation{Author}:}\\S. Kevin McNeill, SA, ATF\\\href{mailto:shonn.mcneill@atf.gov}{shonn.mcneill@atf.gov}
     \end{flushleft}
     \end{minipage}
     \hspace{\fill}
@@ -454,7 +461,7 @@ singlelinecheck=false,format=hang,labelfont={it,bf}}
   \vfill
 
   \begin{minipage}{0.8\textwidth}
-  \begin{center}
+  \begin{center}\LARGE{Scientia est Potentia.}
   \end{center}
   \end{minipage}
 
@@ -471,41 +478,43 @@ singlelinecheck=false,format=hang,labelfont={it,bf}}
 
     \begingroup
     \let\cleardoublepage\relax
-    \let\clearpage\relax\tableofcontents
+    \let\clearpage\relax\tableofcontents\listoffigures\listoftables
     \endgroup
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-On June 21, 2019, at approximately 4:22 AM, a fire and explosion, see
-\cref{fig:fire}, occurred at the Girard Point Refinery owned by
-Philadelphia Energy Solutions \cite{Renshaw2019}. One of the three
-explosions observed that day was from the V1 treater-feed-surge-drum in
-the refineries pretreatment unit. The explosion propelled the largest
-piece (estimated: \(41809.6lb\:(18964.5kg)\)) of the drum approximately
-\(2100ft\:(640m)\) from the blast seat, see \cref{fig:tank}. It is
-hypothesized that a boiling-liquid expanding-vapor explosion (BLEVE)
-event provided the energy to generate the blast wave. The Philadelphia
-Fire Department requested ATF estimate the blast overpressure generated
-when the tank exploded. This paper is an engineering analysis to
-estimate the blast overpressure assuming a BLEVE occurred. The analysis
-is based upon an adiabatic and isentropic energy analysis developed by
-the Center for Chemical Process Safety \cite{Safety2010}.
+A fire and subsequent explosion occurred at approximately 4:22am on June
+21, 2019, at the Philadelphia Energy Solutions Girard Point Refinery,
+see \cref{fig:fire} \cite{Renshaw2019}. The explosion took place in the
+V1 treater-feed-surge-drum (TFSD) within the pretreatment unit. The TFSD
+explosion propelled a \(41809.6lb\:(18964.5kg)\) piece of the steel drum
+approximately \(2100ft\:(640m)\) from the blast seat, see
+\cref{fig:tank}. It is hypothesized that a boiling-liquid
+expanding-vapor explosion (BLEVE) event generated the blast wave and
+broke the drum into fragments. The Philadelphia Fire Department
+requested ATF estimate the blast overpressure, debris throw, and thermal
+effects generated when the tank exploded. This paper will estimate these
+blast parameters assuming a BLEVE occurred. The analysis is based upon
+an adiabatic and isentropic energy analysis developed by the Center for
+Chemical Process Safety \cite{Safety2010}. Analysis was completed using
+Jupyter Notebook running Python 3.7 and published using
+ipypublish\cite{Sewell2019}\cite{Kluyver2019}.
 
 \begin{figure}[H]
 \hypertarget{fig:fire}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/fig_refinery_fire.png}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_refinery_fire.png}
 \end{center}
-\caption{A view of the Philadelphia Energy Solutions Inc's oil refinery while on
-fire \cite{Maykuth2019}.}\label{fig:fire}
+\caption{A view of the Philadelphia Energy Solutions Incs oil refinery on fire
+June 21, 2019 \cite{Maykuth2019}.}\label{fig:fire}
 }
 \end{figure}
 
-    \begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{philadelphia_refinery_files/output_3_0.png}\end{center}\caption{Largest piece of the treater-feed-surge-drum was propelled 2100ft from
-the blast seat. The upper image shows the drum piece in flight moving
-left to right. The second image shows the drum piece after striking the
-edge of the Schuylkill River shoreline.}\label{fig:tank}\end{figure}
+    \begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{philadelphia_refinery_files/output_3_0.png}\end{center}\caption{Largest piece of the TFSD was propelled \(2100ft (640m)\) from the blast
+seat. The upper image shows the drum fragment in flight moving left to
+right. The second image shows the drum fragment after striking the edge
+of the Schuylkill River shoreline.}\label{fig:tank}\end{figure}
 
 \hypertarget{background}{%
 \section{Background}\label{background}}
@@ -513,57 +522,55 @@ edge of the Schuylkill River shoreline.}\label{fig:tank}\end{figure}
 \hypertarget{refinery}{%
 \subsection{Refinery}\label{refinery}}
 
-The Girard Point Refinery is located in southwest Philadelphia, PA, on
-the Schuylkill River, see \cref{fig:map}. The refinery produced
-approximately 335,000 bpd of gasoline, and was the largest on the East
-Coast \cite{AssociatedPress2019}. The treater-feed-surge-drum, involved
-in the explosion, is part of the pretreatment process of alkylation used
-in the production of gasoline.
+The Girard Point Refinery is the largest refinery on the East Coast,
+located in southwest Philadelphia, PA, on the Schuylkill River, see
+\cref{fig:map}. Prior to the fire and explosion, the refinery produced
+approximately 335,000 barrels of gasoline per day
+\cite{AssociatedPress2019}.
 
 \begin{figure}[H]
 \hypertarget{fig:map}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/fig_map_girard.jpeg}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_map_girard.jpeg}
 \end{center}
 \caption{Map of Girard Point Refinery showing the blast seat location
 \cite{Duchneskie2019}.}\label{fig:map}
 }
 \end{figure}
 
-\hypertarget{treater-feed-surge-tank}{%
-\subsection{Treater Feed Surge Tank}\label{treater-feed-surge-tank}}
+\hypertarget{treater-feed-surge-drum}{%
+\subsection{Treater Feed Surge Drum}\label{treater-feed-surge-drum}}
 
-Alkylaition generally converts propylene \((C_3H_6)\), butylene
-\((C_4H_8)\), pentene \((C_5H_{10})\), and isobutane \((C_3H_{10})\) to
-alkane liquids such as isoheptane \((C_7H_{16})\) and isooctane
-\((C_8H_{16})\). These alkylates are a highly valued component in the
-production of gasoline because of there high octane and low vapor
-pressure \cite{flowserve2000}. The treater-feed-surge-drum (TFSD) was
-located between the fluid catalytic cracker and the alkylaition unit.
-The purpose of a surge drum is to stabilize fluctuations in the overall
-system flow rate. The TFSD was part of the pretreatment process for
-alkylation, see \cref{fig:fig_process_flow}. During pretreatment, also
+The TFSD, located between the fluid catalytic cracker and the alkylation
+unit, was part of the alkylation pretreatment process, see
+\cref{fig:fig_pf}. The purpose of a surge drum is to stabilize
+fluctuations in the overall system flow rate. During pretreatment, also
 referred to as sweetening, sulfur compounds (hydrogen sulfide, thiophene
 and mercaptan) are removed to improve color, odor, and oxidation
-stability.
+stability. Following pretreatment, alkylation generally converts
+propylene \((C_3H_6)\), butylene \((C_4H_8)\), pentene \((C_5H_{10})\),
+and isobutane \((C_3H_{10})\) to alkane liquids such as isoheptane
+\((C_7H_{16})\) and isooctane \((C_8H_{16})\). Because of their high
+octane and low vapor pressure, these alkylates are a highly valued
+component in the production of gasoline \cite{flowserve2000}.
 
 \begin{figure}[H]
-\hypertarget{fig:fig_process_flow}{%
+\hypertarget{fig:fig_pf}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/fig_process_flow.jpeg}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_process_flow.png}
 \end{center}
-\caption{Simple flow diagram of the sweetening and treating process where the
-TFSD was located at the time of the explosion.
-\cite{Temur2014,Malone2019}}\label{fig:fig_process_flow}
+\caption{Simple flow diagram showing the TFSD in the alkylation pretreatment
+process\cite{Temur2014,Malone2019}.}\label{fig:fig_pf}
 }
 \end{figure}
 
-The TFSD tank measured 39'-8" in length, not including the heads, see
-\cref{tbl:tbl_tank} and \cref{fig:fig_tank} for construction details
-\cite{PES2019}. At the time of the explosion, the TFSD contained
-\(20160gal\:(76.3m^3)\) of butane (50\% by volume) and butene (40\% by
-volume) and other lesser constituients, see
-\cref{tbl:tbl_chemicals_in_tank}.
+The TFSD tank measured \(39.66ft\:(12.09m)\) in length, not including
+the heads, see \cref{tbl:tbl_tank} and \cref{fig:fig_tank} for
+construction details \cite{PES2019}. At the time of the explosion, the
+TFSD contained \(20160gal\:(76.3m^3)\) of butane (50\% by volume) and
+butene (40\% by volume) and other lesser constituients, see
+\cref{tbl:tbl_chemicals_in_tank} for a complete list of chemicals
+present.
 
 \begin{longtable}[]{@{}rll@{}}
 \caption{Treater-Feed-Surge-Drum Construction Parameters \cite{PES2019}
@@ -619,7 +626,7 @@ in\strut
 \begin{minipage}[t]{0.23\columnwidth}\raggedleft
 Volume\strut
 \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
-372228\strut
+37201\strut
 \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
 gal\strut
 \end{minipage}\tabularnewline
@@ -650,18 +657,18 @@ psig\strut
 \begin{figure}[H]
 \hypertarget{fig:fig_tank}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.8\linewidth}{philadelphia_refinery_files/fig_tank.jpeg}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_tank.png}
 \end{center}
 \caption{Diagram depicting the dimensions of the TFSD tank. The tank was
-positioned 25 ft above ground level and estimated to contain 20160 gal
-(53.3\% filled) of butane (50\% by volume) and butene (40\% by volume)
-at the time of the explosion.\cite{PES2019}}\label{fig:fig_tank}
+positioned \(25ft\:(7.6m)\) above ground level and estimated to contain
+\(20160gal\:(76.3m^3)\) (53.3\% filled) of butane (50\% by volume) and
+butene (40\% by volume) at the time of the explosion.\cite{PES2019}}\label{fig:fig_tank}
 }
 \end{figure}
 
 \begin{longtable}[]{@{}rr@{}}
-\caption{Chemical Contents in the Treater-Feed-Surge-Drum Nearest to the
-Time of the Explosion \cite{PES2019}
+\caption{Chemical Contents in the Treater-Feed-Surge-Drum at the Time of
+the Explosion \cite{PES2019}
 \label{tbl:tbl_chemicals_in_tank}}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.19\columnwidth}\raggedleft
@@ -762,17 +769,16 @@ C7+\strut
 \bottomrule
 \end{longtable}
 
-For this analysis it will be assumed that the entire mixture is butane.
-This assumption greatly simplifies the analysis, avoiding partial
-pressures and multiple energy calculations with different vapor
-qualities. The assumption is reasonable because butane and butene make
-up more than 90\% of the fluid volume and butane and butene are
-chemically similar, see \cref{tbl:tbl_butane_prop}. The boiling
-temperatures for butene and butane are
-\(20.66\: ^{\circ} F\:(-6.3\: ^{\circ} C)\) and
-\(31.1\: ^{\circ} F\:(-1.0\: ^{\circ} C)\) respectively; both are well
-above the tank temperature when exposed to fire so a BLEVE assumptions
-is reasonable.
+For this analysis, it will be assumed the entire mixture is butane. This
+assumption avoids partial pressures and multiple energy calculations
+with different vapor qualities greatly simplifying the analysis. The
+assumption is reasonable because butane and butene are chemically
+similar and make up more than 90\% of the fluid volume, see
+\cref{tbl:tbl_butane_prop}. A BLEVE assumption is reasonable because,
+the boiling temperatures for butene
+\(\left(20.66\: ^{\circ} F\:(-6.3\: ^{\circ} C)\right)\) and butane
+\(\left(31.1\: ^{\circ} F\:(-1.0\: ^{\circ} C)\right)\) are both well
+above the tank temperature when exposed to fire.
 
 \begin{longtable}[]{@{}rrr@{}}
 \caption{Chemical Properties of Butene and Butane
@@ -846,45 +852,47 @@ Density at 25\(^{\circ} C\), 1 atm\strut
 \hypertarget{pressure-relief-valve}{%
 \subsection{Pressure Relief Valve}\label{pressure-relief-valve}}
 
-The TFSD was fitted with a Consolidated (1906-30LC-1-CC-MS-31-RF-1) 3" x
-4" pressure relief valve (PRV). The relief pressure was set to
-\(155 psig\:(1068.7kPa)\) and the relief temperature was set to
-\(183.5^{\circ} F\:(84.3^{\circ}C)\). The PRV was positioned on the top
-of the TRFD, see \cref{fig:fig_tank}.
+The TFSD was fitted with a Consolidated (1906-30LC-1-CC-MS-31-RF-1)
+\(3in\:x\:4in\:(7.63cm\:x\:10.16cm)\) pressure relief valve (PRV). The
+relief pressure was set to \(155 psig\:(1068.7kPa)\) and the relief
+temperature was set to \(183.5^{\circ} F\:(84.3^{\circ}C)\). The PRV was
+positioned on the top of the TFSD, see \cref{fig:fig_tank}. It is
+assumed the PRV functioned as designed.
 
 \hypertarget{recovered-drum-debris}{%
 \subsection{Recovered Drum Debris}\label{recovered-drum-debris}}
 
-Three major pieces of the TFSD were identified after the explosion. They
-were thrown a maximum of \(2100ft\:(640m)\), see
-\cref{fig:blast_debris}. The largest piece (Large End Cap) was
-approximately \(22ft\:(6.7m)\) in length, see \cref{fig:large_end_cap},
-or a little more than half the original tank length. The other end of
-the TFSD (Small End Cap) was recovered \(1761ft\:(536m)\) from the blast
-seat. It was approximately \(5ft\:(1.5m)\) in length, see
+Three major pieces of the TFSD were identified after the explosion, see
+\cref{fig:blast_debris}. The largest piece (large-end-cap) was recovered
+\(2100ft\:(640m)\) from the blast seat. It was approximately
+\(22ft\:(6.7m)\) in length, or a little more than half the original tank
+length, see \cref{fig:large_end_cap}. The other end of the TFSD
+(small-end-cap) was recovered \(1761ft\:(536m)\) from the blast seat. It
+was approximately \(5ft\:(1.5m)\) in length, see
 \cref{fig:small_end_cap}. The piece thrown the shortest distance
-(fillet) was \(819ft\:(249m)\) from the blast seat. The fillet piece was
-heavily damaged and a photographic analysis of the length was not
-possible. However, based on the original length of the tank and removing
-the large and small end cap lengths the fillet length is approximately
-\(12ft\:(3.6m)\), see \cref{fig:fillet}.
+(center-section) was \(819ft\:(249m)\) from the blast seat. The
+center-section piece was heavily damaged and a photographic analysis of
+the length was not possible. However, based on the original length of
+the tank after removing the large and small-end-cap lengths, the
+center-section length is approximately \(12ft\:(3.6m)\), see
+\cref{fig:fillet}.
 
 \begin{figure}[H]
 \hypertarget{fig:blast_debris}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/drum_debris_and_blast_seat_distances_small.png}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/drum_debris_and_blast_seat_distances.jpg}
 \end{center}
 \caption{Map of Girard Point showing the blast seat and locations of the three
-main pieces of the TSFD (V-1).\cite{Malone2019a}}\label{fig:blast_debris}
+main pieces of the TSFD (V-1) recovered.\cite{Malone2019a}}\label{fig:blast_debris}
 }
 \end{figure}
 
 \begin{figure}[H]
 \hypertarget{fig:large_end_cap}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/tank_length_estimate.png}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/tank_length_estimate.png}
 \end{center}
-\caption{Photograph of the large end cap, estimated to be \(22ft\:(6.7m)\) in
+\caption{Photograph of the large-end-cap, estimated to be \(22ft\:(6.7m)\) in
 length based on photographic analysis. In this photograph the tank has
 been moved from it's original landing location.\cite{Malone2019a}}\label{fig:large_end_cap}
 }
@@ -893,9 +901,9 @@ been moved from it's original landing location.\cite{Malone2019a}}\label{fig:lar
 \begin{figure}[H]
 \hypertarget{fig:small_end_cap}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/end_cap_03.jpg}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/end_cap_03.jpg}
 \end{center}
-\caption{Photograph of the small end cap, estimated to be \(5ft\:(1.5m)\) in
+\caption{Photograph of the small-end-cap, estimated to be \(5ft\:(1.5m)\) in
 length based on photographic analysis.\cite{Malone2019a}}\label{fig:small_end_cap}
 }
 \end{figure}
@@ -903,16 +911,16 @@ length based on photographic analysis.\cite{Malone2019a}}\label{fig:small_end_ca
 \begin{figure}[H]
 \hypertarget{fig:fillet}{%
 \begin{center}
-\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.75\linewidth}{philadelphia_refinery_files/1_fish_fillet2.jpg}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/1_fish_fillet2.jpg}
 \end{center}
-\caption{Photograph of the fish fillet piece, calculated to be \(12ft\:(3.6m)\)
-in length based on the total length of the drum less the lengths of the
-large and small end caps.\cite{Malone2019a}}\label{fig:fillet}
+\caption{Photograph of the center-section piece, calculated to be
+\(12ft\:(3.6m)\) in length based on the total length of the drum less
+the lengths of the large and small-end-caps.\cite{Malone2019a}}\label{fig:fillet}
 }
 \end{figure}
 
 The estimated mass of each piece of the TFSD is summarized in
-\cref{tbl:tbl_tank}. The mass calculations are based on the refinery
+\cref{tbl:tbl_tank_wt}. The mass calculations are based on the refinery
 recorded mass of the vessel, \(74660lb\:(33865kg)\), multiplied by the
 percent mass calculated using the following equations,
 
@@ -923,12 +931,12 @@ Ellipsoidal Head:
 where the drum wall thickness is \(0.83in\:(2.1cm)\), the tank diameter
 is \(12ft\:(3.7m)\), and the material density for A516 steel is
 \(7.8g/cc\)\cite{Malone2019}. The difference in calculated and refinery
-recorded mass is likely due to appurtenances attached to the tank not
-accounted for in the calculated mass.
+recorded mass is likely due to other structural components attached to
+the tank not accounted for in the calculated mass.
 
 \begin{longtable}[]{@{}lrrrr@{}}
-\caption{Estimated Treater-Feed-Surge-Drum Debris Mass \cite{PES2019}
-\label{tbl:tbl_tank}}\tabularnewline
+\caption{Estimated TFSD Debris Mass \cite{PES2019}
+\label{tbl:tbl_tank_wt}}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.17\columnwidth}\raggedright
 TFSD ID\strut
@@ -958,7 +966,7 @@ Refinery Recorded Mass (lb)\strut
 \midrule
 \endhead
 \begin{minipage}[t]{0.17\columnwidth}\raggedright
-Large End Cap\strut
+Large-End-Cap\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
 22.0\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
@@ -969,7 +977,7 @@ Large End Cap\strut
 41809.6\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.17\columnwidth}\raggedright
-Small End Cap\strut
+Small-End-Cap\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
 5.0\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
@@ -980,7 +988,7 @@ Small End Cap\strut
 13438.8\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.17\columnwidth}\raggedright
-Fillet\strut
+Center-Section\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
 12.0\strut
 \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedleft
@@ -1011,10 +1019,11 @@ Total\strut
 A BLEVE results from the sudden failure of a tank containing a
 compressed vapor (head space) and a super-heated liquid (a liquid heated
 above it's boiling point but without boiling). The magnitude of the
-blast depends on how super-heated the liquid was at failure. As the
-level of super-heat rises, the portion of liquid that flash-boils rises,
-thus increasing the energy released. Once containment failure occurs the
-energy is distributed into four forms:
+blast depends on how super-heated the liquid was at failure. There is a
+direct relationship between the super-heat temperature and the quantity
+of liquid that flash-boils. Higher volumes of fluid that flash-boil
+release more energy. Once containment failure occurs, the energy is
+distributed into four forms:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1031,79 +1040,33 @@ energy is distributed into four forms:
 
 The distribution of the energy into the these four forms depends on the
 specifics of the explosion. Planas-Cuchi et al.~found that a
-\emph{fragile} failure releases 80\% of the energy into the blastwave,
-while a \emph{ductile} failure releases 40\% of the energy into the
-blastwave. The remaining energy becomes kinetic energy of the fragments.
-The heat transfer to the environment is relatively small
-\cite{Planas2004}. In practice most pressure vessels are designed with
-materials that are ductile rather than brittle to avoid sudden and
-catastrophic brittle (fragile) failures \cite{Benac2016}.
+\emph{brittle}\footnote{Brittle failure refers to the breakage of a material due to a sudden fracture. When a brittle failure occurs, the material breaks suddenly instead of deforming or straining under load. The fracturing or breaking can occur with only a small amount of load, impact force or shock. Brittle materials absorb less energy before breaking or fracturing, despite the materials having a high strength.}
+failure releases 80\% of the energy into the blastwave, while a
+\emph{ductile}\footnote{A ductile failure is a type of failure seen in malleable materials characterized by extensive plastic deformation or necking. This usually occurs prior to the actual failure of the material. The term ductile rupture refers to the failure of highly ductile materials. In such cases, materials pull apart instead of cracking.}
+failure releases 40\% of the energy into the blastwave. The remaining
+energy becomes kinetic energy of the fragments. The heat transfer to the
+environment is relatively small \cite{Planas2004}. In practice, most
+pressure vessels are designed with materials that are ductile rather
+than brittle to avoid sudden and catastrophic brittle (fragile) failures
+\cite{Benac2016}.
 
-\begin{table}[H]
-\caption{Propane Thermodynamic Data for Inital (1) and Final (2) States}\label{tbl:thermo}
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{lrrrrrrrrr}
-\toprule
-{} &  $P \left(kPa\right)$ &  $u_f \left(\frac{kJ}{kg\:K}\right)$ &  $u_g \left(\frac{kJ}{kg\:K}\right)$ &  $v_f \left(\frac{m^3}{kg}\right)$ &  $v_g \left(\frac{m^3}{kg}\right)$ &  $s_f \left(\frac{kJ}{kg\:K}\right)$ &  $s_g \left(\frac{kJ}{kg\:K}\right)$ &  $h_f \left(\frac{kJ}{kg}\right)$ &  $h_g \left(\frac{kJ}{kg}\right)$ \\
-State     &                       &                                      &                                      &                                    &                                    &                                      &                                      &                                   &                                   \\
-\midrule
-butane-1  &              1.42E+03 &                             4.48E+02 &                             6.78E+02 &                           2.11E-03 &                           2.77E-02 &                             1.78E+00 &                             2.49E+00 &                          4.51E+02 &                          7.17E+02 \\
-butane-2  &              1.01E+02 &                             1.99E+02 &                             5.47E+02 &                           1.66E-03 &                           3.69E-01 &                             9.96E-01 &                             2.41E+00 &                          1.99E+02 &                          5.85E+02 \\
-Propane-1 &              1.94E+03 &                             3.50E+02 &                             5.82E+02 &                           2.29E-03 &                           2.25E-02 &                             1.50E+00 &                             2.33E+00 &                          3.55E+02 &                          6.25E+02 \\
-Propane-2 &              1.01E+02 &                             1.00E+02 &                             4.84E+02 &                           1.72E-03 &                           4.14E-01 &                             6.07E-01 &                             2.45E+00 &                          1.00E+02 &                          5.26E+02 \\
-\bottomrule
-\end{tabular}
+\hypertarget{overpressure-and-impulse-from-the-bleve}{%
+\section{Overpressure and Impulse from the
+BLEVE}\label{overpressure-and-impulse-from-the-bleve}}
 
-\end{adjustbox}
-\end{table}
+There is a seven step method for calculating the overpressure and
+impulse from a BLEVE. The method is given in
+\cref{fig:fig_bleve_process}.
 
-\hypertarget{calculation-of-air-blast-from-a-bleve}{%
-\section{Calculation of Air Blast from a
-BLEVE}\label{calculation-of-air-blast-from-a-bleve}}
-
-There is a seven step process for calculating the air blast from a
-BLEVE:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Data Collection
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Vessel internal pressure, \(p_1\)
-  \item
-    Ambient air pressure, \(p_2\)
-  \item
-    Vessel volume
-  \item
-    Ratio of specific heats of gas in the vessel
-  \item
-    Distance from the center of the tank to the receptor
-  \item
-    Shape of the vessel (spherical or cylindrical)
-  \item
-    Speed of sound of air
-  \item
-    Ratio of specific heats of air\\
-  \end{enumerate}
-\item
-  Calculate the Internal Energy at the Initial State (pre-explosion)
-\item
-  Calculate the Internal Energy at the Final State (atmospheric)
-\item
-  Calculate the Specific Work
-\item
-  Calculate the Explosion Energy
-\item
-  Calculate the Non-Dimensional Range to the Receptor
-\item
-  Calculate Overpressure and Impulse
-\end{enumerate}
+\begin{figure}[H]
+\hypertarget{fig:fig_bleve_process}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=0.35\linewidth}{philadelphia_refinery_files/fig_bleve_airblast_calc.png}
+\end{center}
+\caption{Calculation of energy of flashing liquids and pressure vessel bursts
+filled with vapor or nonideal gas. \cite{Safety2010}}\label{fig:fig_bleve_process}
+}
+\end{figure}
 
 \hypertarget{data-collection}{%
 \subsection{Data Collection}\label{data-collection}}
@@ -1114,37 +1077,37 @@ For this analysis the following data will be used:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Ambient air pressure, \{\{p\_atm\_s\}\}
+  Ambient air pressure, \(14.7psi\:(101.3kPa)\)
 \item
-  Vessel volume, \{\{v\_tank\_s\}\}
+  Vessel volume, \(37200.63gal\:(140.82m^3)\)
 \item
   Ratio of specific heats of butane (1.12)
 \item
-  Distance from the center of the tank to the receptor, \{\{R\_s\}\}
+  Distance from the center of the tank to the receptor,
+  \(32.81ft\:(10.00m)\)
 \item
-  Shape of the vessel is cylindrical, L/D=\{\{l\_over\_d\_s\}\}
+  Shape of the vessel is cylindrical, \(L/D=3.29\)
 \item
-  Speed of sound of air, \{\{a\_s\}\}
+  Speed of sound of air, \(1115.49ft/s\:(340.00m/s)\)
 \end{enumerate}
 
-\hypertarget{calculate-the-internal-energy}{%
-\subsection{Calculate the Internal
-Energy}\label{calculate-the-internal-energy}}
+\hypertarget{internal-energy}{%
+\subsection{Internal Energy}\label{internal-energy}}
 
 \hypertarget{pressure-at-state-1-pre-failure-state}{%
 \subsubsection{Pressure at State 1 (Pre-failure
 State)}\label{pressure-at-state-1-pre-failure-state}}
 
-The drum (tank) is assumed to fail at \(1.21\) times the opening
-pressure of the pressure relief valve (PRV)\cite{Engineers2013}. This
-pressure is based on the American Petroleum Institutes Standard 521
-which, requires that pressure relief valves on pressure vessels achieve
-rated flow at 1.21 times the maximum allowable working pressure. The PRV
-was set to \{\{p\_relief\_s\}\} therefore, the absolute pressure at
-state 1 (failure state) is given by,
+The TFSD is assumed to fail at \(1.21\) times the opening pressure of
+the pressure relief valve (PRV)\cite{Engineers2013}. This pressure is
+based on the American Petroleum Institutes Standard 521 requiring
+pressure relief valves on pressure vessels to achieve rated flow at 1.21
+times the maximum allowable working pressure. The PRV was set to
+\(155.00psi\:(1068.69kPa)\) therefore, the absolute pressure at state 1
+(failure state) is given by,
 
 \begin{equation}p_1 = 1.21\left(p_{PRV}+p_{atm}\right)\end{equation}
-\begin{equation}p_1 = 1.21\left(14.70+155.00\right)\end{equation}
+\begin{equation}p_1 = 1.21\left(155.00+14.70\right)\end{equation}
 \begin{equation}p_1 = 205.33 psia\:(1.42\:MPa)\end{equation}
 
 \hypertarget{pressure-at-state-2-final-expanded-state}{%
@@ -1152,13 +1115,17 @@ state 1 (failure state) is given by,
 State)}\label{pressure-at-state-2-final-expanded-state}}
 
 The pressure at state 2 (final expanded state) is standard atmospheric
-pressure or \{\{p\_atm\_s\}\}. \#\#\# Internal Energy Th internal energy
-\(u\) can be used to estimate the energy released in an explosion. With
-the gases in the saturated state and knowing the pressures at state 1
-(explosion) and state 2 (atmospheric) we can use lookup tables determine
-the specific volume \(v\), and the enthalpy \(h\). Combining these two
-properties with the pressure we can calculate the internal energy \(u\)
-using,
+pressure or \(14.7psi\:(101.3kPa)\).
+
+\hypertarget{internal-energy-1}{%
+\subsubsection{Internal Energy}\label{internal-energy-1}}
+
+The internal energy \(u\) can be used to estimate the energy released in
+an explosion. With the gases in the saturated state and knowing the
+pressures at state 1 (explosion) and state 2 (atmospheric), lookup
+tables can be used to determine the specific volume \(v\), and the
+enthalpy \(h\). Combining these two properties with the pressure, the
+internal energy \(u\) can be calculated using,
 
 \begin{equation}h = u + pv\end{equation}
 
@@ -1166,154 +1133,73 @@ where \(h\) is the enthalpy, \(p\) is the pressure, and \(v\) is the
 specific volume. Therefore, solving for the internal energy \(u\) we
 have,
 
-\begin{equation}u = h - pv\end{equation} \#\#\#\# Internal Energy at
-State 1 The internal energy at at state 1 for saturated liquid butane
-is,
+\begin{equation}u = h - pv\end{equation}
 
-\begin{equation}u_{1f-butane} = h_{1f-butane} - (p_{1-butane})(v_{1f-butane})\end{equation}
-\begin{equation}u_{1f-butane} = 451.46\:kJ/kg - (1415.72\:kPa)(0.002110\:m^3/kg)\end{equation}
-\begin{equation}u_{1f-butane} = 448.47\:kJ/kg\end{equation}
+\hypertarget{internal-energy-at-state-1}{%
+\paragraph{Internal Energy at State
+1}\label{internal-energy-at-state-1}}
+
+The internal energy at state 1 for saturated liquid butane is,
+
+\begin{equation}u_{1f} = h_{1f} - (p_{1})(v_{1f})\end{equation}
+\begin{equation}u_{1f} = 451.46\:kJ/kg - (1415.72\:kPa)(0.002110\:m^3/kg)\end{equation}
+\begin{equation}u_{1f} = 448.47\:kJ/kg\end{equation}
 
 and for the saturated vapor butane at state 1 we have,
 
-\begin{equation}u_{1g-butane} = h_{1g-butane} - (p_{1-butane})(v_{1g-butane})\end{equation}
-\begin{equation}u_{1g-butane} = 716.93\:kJ/kg - (1415.72\:kPa)(0.027658\:m^3/kg)\end{equation}
-\begin{equation}u_{1g-butane} = 677.77\:kJ/kg\end{equation}
+\begin{equation}u_{1g} = h_{1g} - (p_{1})(v_{1g})\end{equation}
+\begin{equation}u_{1g} = 716.93\:kJ/kg - (1415.72\:kPa)(0.027658\:m^3/kg)\end{equation}
+\begin{equation}u_{1g} = 677.77\:kJ/kg\end{equation}
 
 and similarly for saturated liquid and vapor butane at state 2,
 
-\begin{equation}u_{2f-butane} = 198.70\:kJ/kg\end{equation}
-\begin{equation}u_{2g-butane} = 547.18\:kJ/kg\end{equation}
+\begin{equation}u_{2f} = 198.70\:kJ/kg\end{equation}
+\begin{equation}u_{2g} = 547.18\:kJ/kg\end{equation}
 
 All the gas properties are summarized in \cref{tbl:thermo}
 
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-'0.552'
-\end{lstlisting}
+\begin{table}[H]
+\caption{Propane Thermodynamic Data for Inital (1) and Final (2) States}\label{tbl:thermo}
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+{} &  $P \left(kPa\right)$ &  $u_f \left(\frac{kJ}{kg\:K}\right)$ &  $u_g \left(\frac{kJ}{kg\:K}\right)$ &  $v_f \left(\frac{m^3}{kg}\right)$ &  $v_g \left(\frac{m^3}{kg}\right)$ &  $s_f \left(\frac{kJ}{kg\:K}\right)$ &  $s_g \left(\frac{kJ}{kg\:K}\right)$ &  $h_f \left(\frac{kJ}{kg}\right)$ &  $h_g \left(\frac{kJ}{kg}\right)$ \\
+State    &                       &                                      &                                      &                                    &                                    &                                      &                                      &                                   &                                   \\
+\midrule
+butane-1 &              1.42E+03 &                             4.48E+02 &                             6.78E+02 &                           2.11E-03 &                           2.77E-02 &                             1.78E+00 &                             2.49E+00 &                          4.51E+02 &                          7.17E+02 \\
+butane-2 &              1.01E+02 &                             1.99E+02 &                             5.47E+02 &                           1.66E-03 &                           3.69E-01 &                             9.96E-01 &                             2.41E+00 &                          1.99E+02 &                          5.85E+02 \\
+\bottomrule
+\end{tabular}
 
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-'0.060'
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-1.7760453561467684
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-0.995855600883855
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-2.49481766814036
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-2.4104723045811838
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-['Propane',
- '1',
- 1937603.25,
- 2.3259696413037125,
- 1.5031877084055703,
- 0.022458785317331167,
- 0.0022873292738805956,
- 625197.7303826051,
- 354584.41313623305,
- 581.681514960692,
- 350.1524765013418]
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-198.6972888133179
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-547.1761776153619
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-390.8904519918364
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-526.3984089859629
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-100.18186023799389
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-484.01109825702235
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-286.9067902559326
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-458.34586460946844
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-63.24568624540922
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-123.33565035122353
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-448.4686458032733
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-390.8904519918364
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-57.578193811436904
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-677.7734327070058
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-526.3984089859629
-\end{lstlisting}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-151.3750237210429
-\end{lstlisting}
+\end{adjustbox}
+\end{table}
 
 \hypertarget{internal-energy-at-state-2}{%
 \paragraph{Internal Energy at State
 2}\label{internal-energy-at-state-2}}
 
 When the drum containment fails and the butane at state 1 expands to
-state 2 (atmospheric pressure) it is no longer at a saturated stated.
-Some of the liquid vaporizes and some of the vapor condenses. We can use
-the quality of the vapor and liquid to calculate the unsaturated
+state 2 (atmospheric pressure), it is no longer at a saturated stated.
+Some of the liquid vaporizes and some of the vapor condenses. The
+quality of the vapor and liquid can be used to calculate the unsaturated
 internal energy at state 2. The vapor quality \((\chi)\), can be
 calculated from,
 
-\begin{equation}\chi = \frac{s_1 - s_2}{s_{g2}-s_{f2}}\end{equation}
+\begin{equation}\chi = \frac{s_1 - s_2}{s_{2g}-s_{2f}}\end{equation}
 
 where \(s_1\) and \(s_2\) are the entropies at the initial state (1) and
-\(s_{g2}\) and \(s_{f2}\) are the entropies of the final state (2) of
-the saturated vapor and fluid respectively. If calculating the quality
-of the saturated \emph{liquid} then \(s_1=s_{f1}\) and \(s_2=s_{f2}\)
-where \(s_{f1}\) and \(s_{f2}\) are the entropies at the initial (1) and
-final (2) states of the saturated fluid. Similarly, if calculating the
-quality of the saturated \emph{vapor} \(s_1=s_{g1}\) and
-\(s_2 = s_{g2}\) where \(s_{g1}\) and \(s_{g2}\) are the entropies at
-the initial (1) and final (2) states of the saturated vapor. Therefore
-for saturated liquid butane we have,
+final state (2) and \(s_{2g}\) and \(s_{2f}\) are the entropies of the
+final state (2) of the saturated vapor and fluid respectively. If
+calculating the quality of the saturated \emph{liquid}, then
+\(s_1=s_{1f}\) and \(s_2=s_{2f}\) where \(s_{1f}\) and \(s_{2f}\) are
+the entropies at the initial (1) and final (2) states of the saturated
+fluid. Similarly, if calculating the quality of the saturated
+\emph{vapor} \(s_1=s_{1g}\) and \(s_2 = s_{2g}\) where \(s_{1g}\) and
+\(s_{2g}\) are the entropies at the initial (1) and final (2) states of
+the saturated vapor. Therefore, for the saturated liquid butane,
 
-\begin{equation}\chi_f = \frac{s_{f1} - s_{f2}}{s_{g2}-s_{f2}}\end{equation}
+\begin{equation}\chi_f = \frac{s_{1f} - s_{2f}}{s_{2g}-s_{2f}}\end{equation}
 
 \begin{equation}\chi_f = \frac{1.775 - 0.996}{2.411-0.996}\end{equation}
 
@@ -1321,36 +1207,42 @@ for saturated liquid butane we have,
 
 and for the saturated vapor,
 
-\begin{equation}\chi_g = \frac{s_{g1} - s_{g2}}{s_{g2}-s_{f2}}\end{equation}
+\begin{equation}\chi_g = \frac{s_{1g} - s_{2g}}{s_{2g}-s_{2f}}\end{equation}
 
 \begin{equation}\chi_g= \frac{2.495 - 2.410}{2.410-0.996}\end{equation}
 
 \begin{equation}\chi_g = 0.060\end{equation}
 
-We can then calculate the unsaturated internal energy at state 2 using,
+The unsaturated internal energy at state 2 can be calculated using,
 
-\begin{equation}u_{2-fluid} = (1-\chi_f)u_{f2} + \chi_f u_{g2}\end{equation}
-\begin{equation}u_{2-vapor} = (1-\chi_g)u_{g2} + \chi_g u_{f2}\end{equation}
+\begin{equation}u_{2f} = (1-\chi_f)u_{2f} + \chi_f u_{2g}\end{equation}
+\begin{equation}u_{2g} = (1-\chi_g)u_{2g} + \chi_g u_{2f}\end{equation}
 
-\begin{equation}u_{2-fluid} = (1-0.552)198.70 + (0.552)(547.18)\end{equation}
-\begin{equation}u_{2-vapor} = (1-0.060)547.18 + (0.060)(198.70)\end{equation}
+\begin{equation}u_{2f} = (1-0.552)198.70 + (0.552)(547.18)\end{equation}
+\begin{equation}u_{2g} = (1-0.060)547.18 + (0.060)(198.70)\end{equation}
 
-\begin{equation}u_{2-fluid} = 390.89\:kJ/kg\end{equation}
-\begin{equation}u_{2-vapor} = 526.40\:kJ/kg\end{equation} \#\# Calculate
-the Specific Work The specific work done by a BLEVE is the difference in
-internal energies at state 1 and state 2,
-\begin{equation}e_{ex}=u_1-u_2\end{equation} For the saturated liquid
-butane we have,
-\begin{equation}e_{ex-fluid} = u_{1-fluid} - u_{2-fluid}\end{equation}
-\begin{equation}e_{ex-fluid} = 448.47\:kJ/kg - 390.89\:kJ/kg\end{equation}
-\begin{equation}e_{ex-fluid} = 57.58\:kJ/kg\end{equation} For the
-saturated vapor butane we have,
-\begin{equation}e_{ex-vapor} = u_{1-vapor} - u_{2-vapor}\end{equation}
-\begin{equation}e_{ex-vapor} = 677.77\:kJ/kg - 526.40\:kJ/kg\end{equation}
-\begin{equation}e_{ex-vapor} = 151.38\:kJ/kg\end{equation} \#\#
-Calculate the Explosion Energy The explosion energy is simply the
-specific work multiplied by the mass of fluid (liquid or vapor)
-initially in the drum.
+\begin{equation}u_{2f} = 390.89\:kJ/kg\end{equation}
+\begin{equation}u_{2g} = 526.40\:kJ/kg\end{equation}
+
+\hypertarget{specific-work}{%
+\subsection{Specific Work}\label{specific-work}}
+
+The specific work done by a BLEVE is the difference in internal energies
+at state 1 and state 2, \begin{equation}e_{ex}=u_1-u_2\end{equation} For
+the specific work of the liquid butane,
+\begin{equation}e_{ex-f} = u_{1f} - u_{2f}\end{equation}
+\begin{equation}e_{ex-f} = 448.47\:kJ/kg - 390.89\:kJ/kg\end{equation}
+\begin{equation}e_{ex-f} = 57.58\:kJ/kg\end{equation} For the specific
+work of the vapor butane we have,
+\begin{equation}e_{ex-g} = u_{1-g} - u_{2-g}\end{equation}
+\begin{equation}e_{ex-g} = 677.77\:kJ/kg - 526.40\:kJ/kg\end{equation}
+\begin{equation}e_{ex-g} = 151.38\:kJ/kg\end{equation}
+
+\hypertarget{explosion-energy}{%
+\subsection{Explosion Energy}\label{explosion-energy}}
+
+The explosion energy is the specific work multiplied by the mass of
+fluid (liquid or vapor) initially in the TFSD.
 
 \begin{equation}E_{ex}=e_{ex}m\end{equation}
 
@@ -1358,43 +1250,431 @@ Where \(e_{ex}\) is the specific work of the fluid (vapor or liquid) and
 \(m\) is the mass of the fluid (vapor or liquid).
 
 However, there are two additional factors that must be considered when
-estimating the explosion energy. The first is the ground reflection
-factor, \(gnd\). If the tank were on the ground the reflection factor is
-\(gnd=2\). However, the TFSD drum was located \{\{R\_s\}\} above ground
-level. For this case, a reflection factor of \(gnd=1\) will be assumed.
-The second factor is estimating the amount of energy lost in fragmenting
-the tank, \(frag\). This reduction in energy can range from
-\(frag = 20\%\)-\(50\%\) \cite{Safety2010}. For this calculation a
-fragmentation factor of \(frag=40\%\) will be assumed. With these
+estimating the explosion energy. The first, is the ground reflection
+factor, \(gnd\). If the TFSD were on the ground the reflection factor
+would be \(gnd=2\) however, the TFSD was located \(25ft\:(7.62m)\) above
+ground level. For this case, a reflection factor of \(gnd=1.25\) will be
+assumed. The second factor is estimating the amount of energy lost in
+fragmenting the tank, \(frag\). This reduction in energy can range from
+\(frag = 20\%\)-\(50\%\) \cite{Safety2010}. For this calculation, a
+fragmentation factor of \(frag=40\%\) will be assumed, therefore
+\(60\%\) is available for overpressure and impulse. With these
 additional factors our explosion energy is,
 
 \begin{equation}E_{ex}=(gnd)(frag)e_{ex}m\end{equation}
-\begin{equation}E_{ex}=(1)(0.4)e_{ex}m\end{equation}
-\begin{equation}E_{ex}=0.4e_{ex}m\end{equation}
+\begin{equation}E_{ex}=(1.25)(0.6)e_{ex}m\end{equation}
+\begin{equation}E_{ex}=0.75e_{ex}m\end{equation}
 
-Because the fluid is present both as a saturated vapor and liquid we
-will need to calculate the explosion energy for each and then sum them
-together. For the saturated liquid butane we have,
+Because the fluid is present both as a saturated vapor and liquid, the
+explosion energy for each must be calculated separately and then summed
+together. For the saturated liquid butane,
 
-\hypertarget{the-explosion-energy}{%
-\section{The Explosion Energy}\label{the-explosion-energy}}
+\begin{equation}E_{ex-f}=0.75(57.58kJ/kg)(35570.96kg)\end{equation}
+\begin{equation}E_{ex-f}=1536.08MJ\end{equation}
 
-The explosion energy is calcu
+and similarly for the saturated vapor,
 
-\hypertarget{nondimensional-side-on-pressure-and-impulse}{%
-\subsection{Nondimensional Side-on Pressure and
-Impulse}\label{nondimensional-side-on-pressure-and-impulse}}
+\begin{equation}E_{ex-g}=269.95MJ\end{equation}
 
-The nondimenstional side-on pressure can be calculated from Figure X and
-gives a \(\bar{P_s} = 0.064\) for an \(\bar{R}=4.4\) and a
-\(p/p_0 = 19.12\). The nondimensional side-on impulse can be calculated
-from Figure Y and gives a \(\bar{i_s} = 0.013\) for an \(\bar{R}=4.4\)
-and a \(p/p_0 = 19.12\).
+Therefore the total energy for explosion is,
 
-The side-on pressure and impulse can be calculated from the following:
+\begin{equation}E_{tot} = 1806.03MJ\end{equation}
 
-\begin{equation}\bar{P_s} - p_0 = (0.064)(101.325\:kPa) = 6.5\:kPa\end{equation}
-\begin{equation}i_s = \frac{(0.013)(101325\:kPa)^{2/3}(1160.9E6\:J)^{1/3}}{340\:m/s}= 86.31\:Pa {\text -} s\end{equation}
+\hypertarget{non-dimensional-range-to-the-target}{%
+\subsection{Non-dimensional Range to the
+Target}\label{non-dimensional-range-to-the-target}}
+
+For this analysis, a range of \(R= 32.18ft\:(10m)\) was chosen. However,
+to use the Baker-Tang overpressure and impulse curves, we must calculate
+the non-dimensional range to the target from\cite{Safety2010},
+
+\begin{equation}\overline{R} = R\left(\frac{p_0}{E_{tot}}\right)^{1/3}\end{equation}
+
+where \(R\) is the range where you would like the pressure and impulse
+calculated, \(p_0\) is atmospheric pressure, and \(E_{tot}\) is the
+total explosion energy calculated previously.
+
+\begin{equation}\overline{R} = 10m\left(\frac{101325Pa}{1806.03x10^6}\right)^{1/3} = 0.38\end{equation}
+
+With the non-dimensional range calculated, the Baker-Tang overpressure
+and impulse curves can be used to calculate the non-dimensional
+overpressure and impulse.
+
+\hypertarget{non-dimensional-side-on-pressure-and-impulse}{%
+\subsection{Non-dimensional Side-on Pressure and
+Impulse}\label{non-dimensional-side-on-pressure-and-impulse}}
+
+The non-dimensional side-on pressure can be calculated from
+\cref{fig:overpressure} and gives a \(\bar{P} = 0.950\) for an
+\(\bar{R}=0.38\) and a \(p/p_0 = 13.97 \approx 10\). The non-dimensional
+side-on impulse can be calculated from \cref{fig:impulse} and gives a
+\(\bar{I} = 0.107\) for an \(\bar{R}=0.38\) and a
+\(p/p_0 = 13.97 \approx 10\).
+
+\hypertarget{side-on-pressure-and-impulse}{%
+\subsection{Side-on Pressure and
+Impulse}\label{side-on-pressure-and-impulse}}
+
+The dimensional or \emph{real} side-on pressure and impulse can be
+calculated from the following:
+
+\begin{equation}P_s = \bar{P}p_0 = (0.950)(101.325\:kPa) = 96.26\:kPa \:(13.96psi)\end{equation}
+
+\begin{equation}i_s = \frac{\left(\bar I p_0^{2/3}E_{tot}^{1/3}\right)}{a_0}=\frac{(0.107)(101325\:Pa)^{2/3}(1806.03x10^6\:J)^{1/3}}{340\:m/s}= 831.08Pa {\text -} s\:(0.12psi{\text -}s)\end{equation}
+
+This calculation only accounts for the blast from the expansion of the
+vessel contents. The blast may be followed by a vapor cloud explosion.
+In this case, when the expanding contents of the vessel are immediately
+exposed to fire, there is very little additional overpressure generated.
+This is because the expanding contents begin burning as soon as the fuel
+air ratio will support combustion.
+
+\hypertarget{direct-effects-of-blast-overpressure-on-the-human-body}{%
+\subsection{Direct Effects of Blast Overpressure on the Human
+Body}\label{direct-effects-of-blast-overpressure-on-the-human-body}}
+
+The direct effects of blast overpressure are due to the positive and
+negative phases of the shock wave as it passes through the human body.
+Damage to tissue is due to the shock wave passing through tissue with
+different densities. These density changes place tissue in compression
+and tension resulting in hemorrhages and air embolisms. Typical blast
+over pressure injuries for a human in the open are summarized in
+\cref{tbl:tbl_nfpa}. A person positioned \(32.8ft\:(10m)\) from the TFSD
+would experience an absolute pressure of \(28.66psia\:(197603.74Pa)\)
+and have a 99\% chance of fatality. The ``threshold for fatality'' would
+occur at a distance of approximately \(869.4ft\:(265m)\). \newpage
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Overpressure vs.~Human Injury Probability\cite{nfpa_921_2014}
+\label{tbl:tbl_nfpa}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.24\columnwidth}\raggedright
+Overpressure (psig)\strut
+\end{minipage} & \begin{minipage}[b]{0.38\columnwidth}\raggedright
+Injury\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.24\columnwidth}\raggedright
+Overpressure (psig)\strut
+\end{minipage} & \begin{minipage}[b]{0.38\columnwidth}\raggedright
+Injury\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+14.5\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+Threshold for fatality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+16.0\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+50\% ear drum rupture\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+17.5\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+10\% probability for fatality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+20.5\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+50\% probability for fatality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+25.5\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+90\% probability for fatality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright
+29.0\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright
+99\% probability for fatality\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.33\paperheight}{philadelphia_refinery_files/output_37_0.png}\end{center}\caption{Non-dimensional overpressure curves for various vessel internal
+pressures. The arrow designates the non-dimensional pressure and range
+point for a butane BLEVE in the TFSD.}\label{fig:overpressure}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.33\paperheight}{philadelphia_refinery_files/output_41_0.png}\end{center}\caption{Non-dimenstional impulse curves for various vessel internal pressures.
+The arrow designates the non-dimensional impulse and range point for a
+butane BLEVE in the TFSD.}\label{fig:impulse}\end{figure}
+
+\hypertarget{debris-from-the-bleve}{%
+\section{Debris from the BLEVE}\label{debris-from-the-bleve}}
+
+The same explosion energy results developed in the overpressure and
+impulse calculations can be used for the fragmentation analysis.
+However, the overpressure energy calculations applied a \(grd=1.25\)
+ground reflection factor. This factor is not applicable when determining
+the energy available for fragment throw calculations. However, the
+\(frag=0.4\) fragmentation factor should be applied. Therefore, the
+available energy for fragmentation is,
+
+\begin{equation}E_{ex-f}=0.4(57.58kJ/kg)(35570.96kg)\end{equation}
+\begin{equation}E_{ex-f}=819.24MJ\end{equation}
+
+and similarly for the saturated vapor,
+
+\begin{equation}E_{ex-g}=143.97MJ\end{equation}
+
+Therefore the total energy for fragmentation is,
+
+\begin{equation}E_{tot} = 963.22MJ\end{equation}
+
+\hypertarget{initial-debris-speed}{%
+\subsection{Initial Debris Speed}\label{initial-debris-speed}}
+
+A conservative method for determining the initial speed of fragments is
+the empirical method proposed by Moore\cite{moore1967}. The initial
+velocity is given by:
+
+\begin{equation}v_i = 1.0092\left(\frac{E_{tot}G}{M_C}\right)^{0.5}\end{equation}
+
+where for a cylindrical vessel,
+
+\begin{equation}G = \frac{1}{1+M_G/2M_C}\end{equation}
+
+and \(M_G\) is the total gas mass, \(E_{tot}\) is the energy, and
+\(M_C\) is the mass of the vessel. For our case we have,
+
+\begin{equation}v_i = 1.092\left(\frac{(963.22E6J)(0.60)}{35570.96kg}\right)^{0.5}\end{equation}
+
+\begin{equation}v_i = 318.85 mph\:(142.54 m/s)\end{equation}
+
+\hypertarget{debris-throw-ranges}{%
+\subsection{Debris Throw Ranges}\label{debris-throw-ranges}}
+
+With the initial debris speed calculated and the distances to the three
+TFSD pieces known, we can calculate the required launch angle. The
+initial trajectory angle \((a_i)\) can be calculated (neglecting lift
+and drag forces) using,
+
+\begin{equation}a_i = asin\left(\frac{Rg}{2v_i^2}\right)\end{equation}
+
+where \(R\) is the horizontal range and \(g\) is the acceleration of
+gravity.
+
+For the initial velocity of \(318.85mph\:(142.54m/s)\) the large-end-cap
+at a range of \(2099.7ft\:(640m)\) would need a launch angle of
+\(9.0^\circ\), the small-end-cap at a range of \(1715.8ft\:(523m)\)
+would need a launch angle of \(7.3^\circ\), and the center-section at a
+range of \(816.9ft\:(249m)\) would need a launch of angle of
+\(3.5^\circ\), see \cref{fig:fig_launch_angle}. Therefore, the initial
+velocity predicted supports the throw ranges observed. The maximum throw
+range possible (assuming no aerodynamic lift) occurs at a launch angle
+of \(45^{\circ}\). For this case, the maximum throw range would be
+\(6794.9ft\:(2071.1m)\).
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.33\paperheight}{philadelphia_refinery_files/output_54_0.png}\end{center}\caption{Range of debris pieces and calculated launch angle for an initial speed
+of 318.85mph (142.54m/s).}\label{fig:fig_launch_angle}\end{figure}
+
+\hypertarget{thermal-radiation-from-the-bleve}{%
+\section{Thermal Radiation from the
+BLEVE}\label{thermal-radiation-from-the-bleve}}
+
+\hypertarget{fireball-size-and-duration}{%
+\subsection{Fireball Size and
+Duration}\label{fireball-size-and-duration}}
+
+An estimate for the fireball diameter \(D_c\) and duration \(t_c\)
+generated from a BLEVE of \(78420.54lb\:(35570.96kg)\) of liquid butane
+can be calculated using the equation,
+
+\begin{equation}D_c = 5.8m_f^{1/3}\end{equation}
+
+where \(m_f\) is the mass of fluid. For this case,
+
+\begin{equation}D_c = 5.8(35570.96)^{1/3}\end{equation}
+\begin{equation}D_c = 625.81ft\:(190.75m)\end{equation}
+
+see \cref{fig:fig_fireball_dia} for a scaled drawing showing the
+fireball size. The fireball duration \(t_c\) can be estimated from,
+
+\begin{equation}t_c = 0.45m_f^{1/3}\end{equation}
+\begin{equation}t_c = 0.45(35570.96)^{1/3}\end{equation}
+\begin{equation}t_c = 14.80s\end{equation}
+
+Therefore, the fireball from the TFSD would have expanded to
+\(625.81ft\:(190.75m)\) and then dissipated in \(14.8s\).
+
+\begin{figure}[H]
+\hypertarget{fig:fig_fireball_dia}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_fire_ball.png}
+\end{center}
+\caption{Diagram depicting the estimated fireball diameter,
+\(625.8ft\:(190.7m)\), from a butane BLEVE originating from the TFSD
+tank. The TFSD tank and a 6ft human are shown for scale.}\label{fig:fig_fireball_dia}
+}
+\end{figure}
+
+\hypertarget{thermal-radiation}{%
+\subsection{Thermal Radiation}\label{thermal-radiation}}
+
+An estimate for the thermal (infrared) radiation from the BLEVE can be
+estimated for a standing (vertical) observer some distance from the
+fireball. The thermal radiation can then be converted to thermal dose
+units \((TDU)\) to determine the range where the thresholds for pain and
+1st, 2nd, and 3rd degree burns would be observed. The critical TDUs are
+summarized in \cref{tbl:tbl_TDU}.
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Burn Injury vs.~Thermal Dose Relationship \cite{OSullivan2004}
+\label{tbl:tbl_TDU}}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.33\columnwidth}\raggedright
+Harm Caused\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedleft
+Mean TDU \(((kW/m^2)^{4/3}s)\)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.33\columnwidth}\raggedright
+Harm Caused\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedleft
+Mean TDU \(((kW/m^2)^{4/3}s)\)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.33\columnwidth}\raggedright
+Pain\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+92\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.33\columnwidth}\raggedright
+Threshold 1st Degree Burns\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+105\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.33\columnwidth}\raggedright
+Threshold 2nd Degree Burns\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+290\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.33\columnwidth}\raggedright
+Threshold 3rd Degree Burns\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+1000\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+To estimate the harm to an observer, the relationship between the
+emitter (fireball) and the observer (person) must be determined. This
+relationship is called the view factor and for a spherical emitter and
+vertical surface can be found from,
+
+\begin{equation}F_v = \frac{x(D/2)^2}{(x^2+H^2)^{3/2}}\end{equation}
+
+where \(D\) is the diameter and \(H\) is the height to the center of the
+fireball. The fireball is assumed to be spherical with a height of
+\(H = 343.9ft\:(104.8m)\) and a diameter \(D = 312.9ft\:(95.4m)\). The
+range \(x\) will be evaluated over a series of distances to determine
+where critical points of human injury (pain and burns) are predicted to
+occur, see \cref{fig:fig_fireball_thermal}.
+
+\begin{figure}[H]
+\hypertarget{fig:fig_fireball_thermal}{%
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight},width=1.0\linewidth}{philadelphia_refinery_files/fig_radiation_estimate.png}
+\end{center}
+\caption{Diagram depicting the parameters for calculating the view factor used to
+estimate the thermal radiation received by the receptor. The receptor
+(human) is not shown to scale.}\label{fig:fig_fireball_thermal}
+}
+\end{figure}
+
+Assuming a surface-emissive power of \(E = 350kW/m^2\) for the surface
+of the fireball and an atmospheric transmissivity of \(\tau_a = 1\) it
+is possible to estimate the radiation received by the observer using,
+
+\begin{equation}q = EF_v\tau_a\end{equation}
+
+\hypertarget{thermal-dose-units}{%
+\subsection{Thermal Dose Units}\label{thermal-dose-units}}
+
+Finally, the thermal dose units \((TDU)\) received by the observer can
+be estimated by assuming they are exposed to the full fireball duration
+of \(t_c = 14.80s\) using\cite{OSullivan2004},
+
+\begin{equation}TDU = q^{4/3}t_c\end{equation}
+
+If the range to the observer is varied from \(984.3ft\:(300m)\) to
+\(3280.8ft\:(1000m)\) we can calculate the view factor \((F_v)\),
+radiation \((q)\), and thermal dose units \((TDU)\) for the observer.
+Refer to \cref{tbl:TDU} for a summary of the calculations. We can then
+compare the critical \(TDU\) in \cref{tbl:tbl_TDU} to the calculated
+\(TDUs\) at various ranges from the fireball, see \cref{fig:fig_tdu}.
+For the observer to be exposed to 3rd degree burns they would need to be
+inside of \(1312.3ft\:(400m)\), 2nd degree burns inside of
+\(1968.5ft\:(600m)\), and 1st degree burns inside of
+\(2952.76ft\:(900m)\).
+
+\begin{table}[H]
+\caption{Thermal Dose Units Delivered by the BLEVE to a Human in the Open}\label{tbl:TDU}
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrr}
+\toprule
+{} &  View Factor &  Solid Flame Raditation ($kW/m^2$) &  Thermal Dose Units ($(kW/m^2)^{4/3}s$) \\
+Ground Distance (m) &              &                                    &                                         \\
+\midrule
+300                 &       0.0850 &                            29.7609 &                               1364.9134 \\
+350                 &       0.0653 &                            22.8472 &                                959.4496 \\
+400                 &       0.0515 &                            18.0111 &                                698.7112 \\
+450                 &       0.0415 &                            14.5238 &                                524.4272 \\
+500                 &       0.0341 &                            11.9390 &                                403.8322 \\
+550                 &       0.0285 &                             9.9761 &                                317.8266 \\
+600                 &       0.0242 &                             8.4536 &                                254.8573 \\
+650                 &       0.0207 &                             7.2506 &                                207.6883 \\
+700                 &       0.0180 &                             6.2847 &                                171.6423 \\
+750                 &       0.0157 &                             5.4980 &                                143.6089 \\
+800                 &       0.0139 &                             4.8491 &                                121.4662 \\
+850                 &       0.0123 &                             4.3078 &                                103.7339 \\
+900                 &       0.0110 &                             3.8518 &                                 89.3576 \\
+950                 &       0.0099 &                             3.4642 &                                 77.5724 \\
+1000                &       0.0089 &                             3.1319 &                                 67.8145 \\
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\end{table}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.33\paperheight}{philadelphia_refinery_files/output_62_0.png}\end{center}\caption{The thermal dose units received by a human in the open if exposed to the
+BLEVE fireball for 14.2s at a range of distances. The pain and 1st, 2nd,
+and 3rd degree burn thresholds are indicated.}\label{fig:fig_tdu}\end{figure}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+The BLEVE analysis indicates the following:
+
+\begin{itemize}
+\tightlist
+\item
+  The calculated overpressure \(28.66psia\:(197603.74Pa)\) at
+  \(32.8ft\:(10m)\) would be lethal to a human in the open. The
+  threshold for fatality would be approximately than \(869.4ft\:(265m)\)
+\item
+  The large and small-end-caps and the center-section debris had
+  sufficient initial velocity \(318.85mph\:(142.54m/s)\) to be thrown
+  the distances observed. The maximum throw distance possible would be
+  \(6794.9ft\:(2071.1m)\).
+\item
+  The thermal effects would produce 2nd degree burns at
+  \(1870ft\:(570m)\) and 3rd degree burns at \(1135ft\:(346m)\).
+\end{itemize}
+
+This BLEVE analysis is based on safety-engineering models therefore,
+estimates for the consequences are considered conservative. This type of
+analysis is used during the design phase of a plant to identify process
+engineering hazards for employees and the public.
 
 \bibliographystyle{unsrtnat}
 \bibliography{philadelphia_refinery_files/library}
